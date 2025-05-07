@@ -13,7 +13,9 @@ body {
 
 #calculator {
   background-color: black;
+  border: 0.0625rem solid #bdbab6;
   border-radius: 4rem;
   height: 46rem;
+  outline: 0.125rem solid #92908b;
   width: 22rem;
 }
