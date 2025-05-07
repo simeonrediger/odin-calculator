@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #202020;
+  color: white;
+}
+
+#calculator {
+  background-color: black;
+  border-radius: 4rem;
+  height: 46rem;
+  width: 22rem;
+}
