@@ -51,6 +51,11 @@ function clearAll() {
     displayCurrentOperation();
 }
 
+function deleteLastCharacter() {
+    currentOperation = format(currentOperation.slice(0, -1));
+    displayCurrentOperation();
+}
+
 function inputDecimalSeparator() {
     if (!currentOperation.includes('.')) {
         currentOperation = currentOperation + '.';
