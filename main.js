@@ -47,6 +47,13 @@ function displayCurrentOperation() {
     document.querySelector('#current-operation').textContent = currentOperation;
 }
 
+function inputDecimalSeparator() {
+    if (!currentOperation.includes('.')) {
+        currentOperation = currentOperation + '.';
+        displayCurrentOperation();
+    }
+}
+
 function input(string) {
     currentOperation = format(currentOperation + string);
     displayCurrentOperation();
@@ -80,5 +87,9 @@ function addCommaSeparators(string) {
         ''
     );
 
-    return integerPart + (decimalPart ?? '');
+    if (string.includes('.')) {
+        return integerPart + '.' + (decimalPart ?? '');
+    } else {
+        return integerPart;
+    }
 }
