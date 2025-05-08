@@ -74,7 +74,7 @@ function setCurrentOperand(string) {
 
 function deleteLastCharacter() {
     setCurrentOperand(
-        format(currentOperation.slice(0, -1))
+        format(getCurrentOperand().slice(0, -1))
     );
     displayCurrentOperation();
 }
