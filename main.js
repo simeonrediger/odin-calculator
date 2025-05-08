@@ -1,6 +1,6 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
-let operand1, operator, operand2, currentOperandId, currentOperation;
+let operand1, operator, operand2, currentOperandId, operation;
 clearAll();
 
 function displayCurrentTime() {
@@ -42,9 +42,9 @@ function handleButtonClick(event) {
     }
 }
 
-function displayCurrentOperation() {
-    updateCurrentOperation();
-    document.querySelector('#current-operation').textContent = currentOperation;
+function displayOperation() {
+    updateOperation();
+    document.querySelector('#current-operation').textContent = operation;
 }
 
 function clearAll() {
@@ -52,12 +52,12 @@ function clearAll() {
     operator = '';
     operand2 = '';
     currentOperandId = 1;
-    updateCurrentOperation();
-    displayCurrentOperation();
+    updateOperation();
+    displayOperation();
 }
 
-function updateCurrentOperation() {
-    currentOperation = operand1 + operator + operand2;
+function updateOperation() {
+    operation = operand1 + operator + operand2;
 }
 
 function getCurrentOperand() {
@@ -73,11 +73,10 @@ function setCurrentOperand(string) {
 }
 
 function deleteLastCharacter() {
-    console.log(getCurrentOperand(), getCurrentOperand().slice(0, -1))
     setCurrentOperand(
         format(getCurrentOperand().slice(0, -1))
     );
-    displayCurrentOperation();
+    displayOperation();
 }
 
 function inputDecimalSeparator() {
@@ -85,15 +84,15 @@ function inputDecimalSeparator() {
 
     if (!currentOperand.includes('.')) {
         setCurrentOperand(currentOperand + '.');
-        displayCurrentOperation();
+        displayOperation();
     }
 }
 
 function input(character) {
     setCurrentOperand(
-        format(currentOperation + character)
+        format(operation + character)
     );
-    displayCurrentOperation();
+    displayOperation();
 }
 
 function format(string) {
