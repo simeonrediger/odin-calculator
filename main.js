@@ -73,6 +73,7 @@ function setCurrentOperand(string) {
 }
 
 function deleteLastCharacter() {
+    console.log(getCurrentOperand(), getCurrentOperand().slice(0, -1))
     setCurrentOperand(
         format(getCurrentOperand().slice(0, -1))
     );
@@ -97,7 +98,7 @@ function input(character) {
 
 function format(string) {
     string = string.replaceAll(',', '');
-    string = String(+string);  // Remove leading 0s
+    string = String(+string);  // Remove leading 0s and convert '' to 0
     string = addCommaSeparators(string);
     return string;
 }
