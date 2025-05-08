@@ -22,9 +22,13 @@
 }
 
 body {
+  align-items: center;
   background-color: #202020;
   color: white;
+  display: flex;
   font-family: sans-serif;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 #app-screen {
