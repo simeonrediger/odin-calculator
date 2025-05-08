@@ -38,7 +38,7 @@ function handleButtonClick(event) {
         case 'decimal-separator':
             inputDecimalSeparator();
             break;
-        default:  // Case for nonzero numbers
+        default:
             input(event.target.id);
     }
 }
