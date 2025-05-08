@@ -1,6 +1,9 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
 
+let currentOperation = '0';
+displayCurrentOperation();
+
 function displayCurrentTime() {
     const timeDisplay = document.querySelector('#time');
     timeDisplay.textContent = new Date()
@@ -35,7 +38,22 @@ function handleButtonClick(event) {
         case 'decimal-separator':
             inputDecimalSeparator();
             break;
-        default:  // Case for numbers
+        default:  // Case for nonzero numbers
             input(event.target.id);
     }
+}
+
+function displayCurrentOperation() {
+    document.querySelector('#current-operation').textContent = currentOperation;
+}
+
+function input(string) {
+    currentOperation = format(currentOperation + string);
+    displayCurrentOperation();
+}
+
+function format(string) {
+    string = string.replaceAll(',', '');
+    string = String(+string);  // Remove leading 0s
+    return string;
 }
