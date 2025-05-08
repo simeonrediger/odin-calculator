@@ -29,8 +29,8 @@ function handleButtonClick(event) {
         case 'add':
             setOperator(button.id);
             break;
-        case 'decimal':
-            inputDecimal();
+        case 'decimal-separator':
+            inputDecimalSeparator();
             break;
         default:  // Case for numbers
             input(button.id);
