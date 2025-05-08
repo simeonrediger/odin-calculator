@@ -70,19 +70,19 @@ function addCommaSeparators(string) {
     let [integerPart, decimalPart] = string.split('.');
 
     integerPart = Array.from(integerPart).reduceRight(
-        (stringWithCommas, digit, i) => {
+        (commaSeparatedInteger, digit, i) => {
 
             if (
                 integerPart.length > 3 &&
                 integerPart.length - i > 3 &&
                 (integerPart.length - i) % 3 === 1
             ) {
-                stringWithCommas = `${digit},` + stringWithCommas;
+                commaSeparatedInteger = `${digit},` + commaSeparatedInteger;
             } else {
-                stringWithCommas = digit + stringWithCommas;
+                commaSeparatedInteger = digit + commaSeparatedInteger;
             }
 
-            return stringWithCommas;
+            return commaSeparatedInteger;
         },
         ''
     );
