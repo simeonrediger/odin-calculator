@@ -6,6 +6,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --calculator-width: 22rem;
+  --calculator-padding: 1.5rem;
+  --calculator-border-size: 0.0625rem;
+  --buttons-gap: 0.5rem;
+  --button-size: calc(
+    (
+      var(--calculator-width) -
+      2 * var(--calculator-padding) -
+      2 * var(--calculator-border-size) -
+      3 * 0.5rem
+    ) / 4
+  );
+}
+
 body {
   background-color: #202020;
   color: white;
@@ -13,9 +28,27 @@ body {
 
 #calculator {
   background-color: black;
-  border: 0.0625rem solid #bdbab6;
+  border: var(--calculator-border-size) solid #bdbab6;
   border-radius: 4rem;
+  display: flex;
+  flex-direction: column;
   height: 46rem;
+  justify-content: end;
   outline: 0.125rem solid #92908b;
+  padding: 1.5rem;
   width: 22rem;
+}
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+button {
+  border: none;
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
 }
