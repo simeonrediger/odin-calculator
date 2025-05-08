@@ -1,4 +1,7 @@
+import { buttons } from './buttons.js';
+
 displayCurrentTime();
+buttons.addEventListeners();
 
 function displayCurrentTime() {
     const timeDisplay = document.querySelector('#time');
