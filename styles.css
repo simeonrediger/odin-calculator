@@ -145,7 +145,7 @@ button:hover::before {
   padding-bottom: 0.35rem;
 }
 
-.number,
+.digit,
 .number-part {
   background-color: #2a2a2c;
 }
