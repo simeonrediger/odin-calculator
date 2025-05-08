@@ -13,9 +13,12 @@ function displayCurrentTime() {
 }
 
 function handleButtonClick(event) {
-    const button = event.target;
 
-    switch (button.id) {
+    if (event.target.tagName !== 'BUTTON') {
+        return;
+    }
+
+    switch (event.target.id) {
         case 'clear-all':
             clearAll();
             break;
@@ -27,12 +30,12 @@ function handleButtonClick(event) {
         case 'multiply':
         case 'subtract':
         case 'add':
-            setOperator(button.id);
+            setOperator(event.target.id);
             break;
         case 'decimal-separator':
             inputDecimalSeparator();
             break;
         default:  // Case for numbers
-            input(button.id);
+            input(event.target.id);
     }
 }
