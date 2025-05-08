@@ -81,17 +81,21 @@ body {
   margin-right: 1rem;
 }
 
+#last-operation,
+#current-operation {
+  margin-bottom: 0.5rem;
+  text-align: right;
+  overflow: auto;
+  text-wrap: nowrap;
+}
+
 #last-operation {
   color: #89898f;
   font-size: 1.825rem;
-  margin-bottom: 0.5rem;
-  text-align: right;
 }
 
 #current-operation {
   font-size: 4rem;
-  margin-bottom: 0.5rem;
-  text-align: right;
 }
 
 #buttons {
