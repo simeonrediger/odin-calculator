@@ -55,5 +55,30 @@ function input(string) {
 function format(string) {
     string = string.replaceAll(',', '');
     string = String(+string);  // Remove leading 0s
+    string = addCommaSeparators(string);
     return string;
+}
+
+function addCommaSeparators(string) {
+    let [integerPart, decimalPart] = string.split('.');
+
+    integerPart = Array.from(integerPart).reduceRight(
+        (stringWithCommas, digit, i) => {
+
+            if (
+                integerPart.length > 3 &&
+                integerPart.length - i > 3 &&
+                (integerPart.length - i) % 3 === 1
+            ) {
+                stringWithCommas = `${digit},` + stringWithCommas;
+            } else {
+                stringWithCommas = digit + stringWithCommas;
+            }
+
+            return stringWithCommas;
+        },
+        ''
+    );
+
+    return integerPart + (decimalPart ?? '');
 }
