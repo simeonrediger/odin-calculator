@@ -115,7 +115,21 @@ button {
   color: white;
   font-size: 2rem;
   height: var(--button-size);
+  position: relative;
   width: var(--button-size);
+}
+
+button:hover::before {
+  background-color: white;
+  border-radius: 50%;
+  content: '';
+  height: 100%;
+  left: 0;
+  opacity: 50%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .tool {
