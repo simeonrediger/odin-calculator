@@ -1,6 +1,6 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
-let currentOperation;
+let operand1, operator, operand2, currentOperandId, currentOperation;
 clearAll();
 
 function displayCurrentTime() {
@@ -43,28 +43,55 @@ function handleButtonClick(event) {
 }
 
 function displayCurrentOperation() {
+    updateCurrentOperation();
     document.querySelector('#current-operation').textContent = currentOperation;
 }
 
 function clearAll() {
-    currentOperation = '0';
+    operand1 = '0';
+    operator = '';
+    operand2 = '';
+    currentOperandId = 1;
+    updateCurrentOperation();
     displayCurrentOperation();
 }
 
+function updateCurrentOperation() {
+    currentOperation = operand1 + operator + operand2;
+}
+
+function getCurrentOperand() {
+    return currentOperandId === 1 ? operand1 : operand2;
+}
+
+function setCurrentOperand(string) {
+    if (currentOperandId === 1) {
+        operand1 = string;
+    } else {
+        operand2 = string;
+    }
+}
+
 function deleteLastCharacter() {
-    currentOperation = format(currentOperation.slice(0, -1));
+    setCurrentOperand(
+        format(currentOperation.slice(0, -1))
+    );
     displayCurrentOperation();
 }
 
 function inputDecimalSeparator() {
-    if (!currentOperation.includes('.')) {
-        currentOperation = currentOperation + '.';
+    const currentOperand = getCurrentOperand();
+
+    if (!currentOperand.includes('.')) {
+        setCurrentOperand(currentOperand + '.');
         displayCurrentOperation();
     }
 }
 
-function input(string) {
-    currentOperation = format(currentOperation + string);
+function input(character) {
+    setCurrentOperand(
+        format(currentOperation + character)
+    );
     displayCurrentOperation();
 }
 
