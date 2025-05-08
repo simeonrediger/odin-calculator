@@ -40,6 +40,19 @@ body {
   width: 22rem;
 }
 
+#last-operation {
+  color: #89898f;
+  font-size: 1.825rem;
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+
+#current-operation {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+
 #buttons {
   display: flex;
   flex-wrap: wrap;
