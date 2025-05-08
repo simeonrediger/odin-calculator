@@ -1,8 +1,7 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
-
-let currentOperation = '0';
-displayCurrentOperation();
+let currentOperation;
+clearAll();
 
 function displayCurrentTime() {
     const timeDisplay = document.querySelector('#time');
@@ -45,6 +44,11 @@ function handleButtonClick(event) {
 
 function displayCurrentOperation() {
     document.querySelector('#current-operation').textContent = currentOperation;
+}
+
+function clearAll() {
+    currentOperation = '0';
+    displayCurrentOperation();
 }
 
 function inputDecimalSeparator() {
