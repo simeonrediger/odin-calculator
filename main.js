@@ -57,7 +57,11 @@ function clearAll() {
 }
 
 function updateOperation() {
-    operation = operand1 + operator + operand2;
+    operation = (
+        (operand1 ?? '0') +
+        (operator ?? '') +
+        (operand2 ?? '')
+    );
 }
 
 function getCurrentOperand() {
