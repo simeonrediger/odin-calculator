@@ -43,7 +43,6 @@ function handleButtonClick(event) {
 }
 
 function displayOperation() {
-    updateOperation();
     document.querySelector('#current-operation').textContent = operation;
 }
 
