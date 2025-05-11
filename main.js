@@ -15,7 +15,6 @@ function displayCurrentTime() {
 }
 
 function handleButtonClick(event) {
-
     if (event.target.tagName !== 'BUTTON') {
         return;
     }
@@ -32,7 +31,7 @@ function handleButtonClick(event) {
         case 'multiply':
         case 'subtract':
         case 'add':
-            setOperator(event.target.id);
+            inputOperator(event.target.id);
             break;
         case 'decimal-separator':
             inputDecimalSeparator();
@@ -43,6 +42,7 @@ function handleButtonClick(event) {
 }
 
 function displayOperation() {
+    updateOperation();
     document.querySelector('#current-operation').textContent = operation;
 }
 
@@ -57,9 +57,9 @@ function clearAll() {
 
 function updateOperation() {
     operation = (
-        (operand1 ?? '0') +
+        (operand1 ? format(operand1) : '') +
         (operator ?? '') +
-        (operand2 ?? '')
+        (operand2 ? format(operand2) : '')
     );
 }
 
@@ -77,8 +77,20 @@ function setCurrentOperand(string) {
 
 function deleteLastCharacter() {
     setCurrentOperand(
-        format(getCurrentOperand().slice(0, -1))
+        getCurrentOperand().slice(0, -1)
     );
+    displayOperation();
+}
+
+function inputOperator(operatorId) {
+    if (operator) {
+        operand1 = evaluate();
+        currentOperandId = 1;
+    } else {
+        currentOperandId = 2;
+    }
+
+    operator = document.getElementById(operatorId).textContent;
     displayOperation();
 }
 
@@ -93,7 +105,7 @@ function inputDecimalSeparator() {
 
 function inputDigit(digit) {
     setCurrentOperand(
-        format(operation + digit)
+        (getCurrentOperand() ?? '') + digit
     );
     displayOperation();
 }
