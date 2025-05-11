@@ -38,7 +38,7 @@ function handleButtonClick(event) {
             inputDecimalSeparator();
             break;
         default:
-            input(event.target.id);
+            inputDigit(event.target.id);
     }
 }
 
@@ -88,9 +88,9 @@ function inputDecimalSeparator() {
     }
 }
 
-function input(character) {
+function inputDigit(digit) {
     setCurrentOperand(
-        format(operation + character)
+        format(operation + digit)
     );
     displayOperation();
 }
