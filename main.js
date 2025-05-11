@@ -49,8 +49,8 @@ function displayOperation() {
 
 function clearAll() {
     operand1 = '0';
-    operator = '';
-    operand2 = '';
+    operator = null;
+    operand2 = null;
     currentOperandId = 1;
     updateOperation();
     displayOperation();
