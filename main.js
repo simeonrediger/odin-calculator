@@ -1,6 +1,6 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
-let operand1, operator, operand2, currentOperandId, operation;
+let operand1, operator, operand2, currentOperandId;
 clearAll();
 
 function displayCurrentTime() {
@@ -42,7 +42,12 @@ function handleButtonClick(event) {
 }
 
 function displayOperation() {
-    updateOperation();
+    const operation = (
+        (operand1 ? format(operand1) : '') +
+        (operator ?? '') +
+        (operand2 ? format(operand2) : '')
+    );
+
     document.querySelector('#current-operation').textContent = operation;
 }
 
@@ -51,16 +56,7 @@ function clearAll() {
     operator = null;
     operand2 = null;
     currentOperandId = 1;
-    updateOperation();
     displayOperation();
-}
-
-function updateOperation() {
-    operation = (
-        (operand1 ? format(operand1) : '') +
-        (operator ?? '') +
-        (operand2 ? format(operand2) : '')
-    );
 }
 
 function getCurrentOperand() {

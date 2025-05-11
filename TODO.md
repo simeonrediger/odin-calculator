@@ -8,11 +8,13 @@
 - disable the decimal-separator when one is already in current operand
 - add keyboard support
 
-- consider an array for operands and operators
+- update current time continuously
+- add decimal separator to end of integer when typed
 - handle float imprecision (e.g., 0.1 + 0.2) if not already handled by rounding
 - reduce hover overlay opacity
 - add accessibility features
 
+General flow:
 - Set to operand 1
 - Click numbers
 - Click operator (use last of consecutive clicks)
