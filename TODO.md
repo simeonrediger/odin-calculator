@@ -25,4 +25,4 @@ General flow:
 - If number clicked
     - Clear and set to operand 1
 - If operator clicked
-    - Set to operatand 2
+    - Set to operand 2

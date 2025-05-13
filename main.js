@@ -1,6 +1,6 @@
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
-let operand1, operator, operand2, currentOperandId;
+let operand1, operator, operand2, currentOperandId, operatorId;
 clearAll();
 
 function displayCurrentTime() {
@@ -33,6 +33,9 @@ function handleButtonClick(event) {
         case 'add':
             inputOperator(event.target.id);
             break;
+        case 'evaluate':
+            evaluate();
+            break;
         case 'decimal-separator':
             inputDecimalSeparator();
             break;
@@ -44,7 +47,7 @@ function handleButtonClick(event) {
 function displayOperation() {
     const operation = (
         (operand1 ? format(operand1) : '') +
-        (operator ?? '') +
+        (document.getElementById(operatorId)?.textContent ?? '') +
         (operand2 ? format(operand2) : '')
     );
 
@@ -53,7 +56,7 @@ function displayOperation() {
 
 function clearAll() {
     operand1 = '0';
-    operator = null;
+    operatorId = null;
     operand2 = null;
     currentOperandId = 1;
     displayOperation();
@@ -78,15 +81,38 @@ function deleteLastCharacter() {
     displayOperation();
 }
 
-function inputOperator(operatorId) {
-    if (operator) {
+function evaluate() {
+    switch (operatorId) {
+        case 'raise': 
+            operand1 = operand1 ** operand2;
+            break;
+        case 'divide':
+            operand1 = operand1 / operand2;
+            break;
+        case 'multiply':
+            operand1 = operand1 * operand2;
+            break;
+        case 'subtract':
+            operand1 = operand1 - operand2;
+            break;
+        case 'add':
+            operand1 = +operand1 + +operand2;
+    }
+
+    operatorId = null;
+    operand2 = null;
+    displayOperation();
+}
+
+function inputOperator(newOperatorId) {
+    if (operatorId) {
         operand1 = evaluate();
         currentOperandId = 1;
     } else {
         currentOperandId = 2;
     }
 
-    operator = document.getElementById(operatorId).textContent;
+    operatorId = newOperatorId;
     displayOperation();
 }
 
@@ -107,8 +133,11 @@ function inputDigit(digit) {
 }
 
 function format(string) {
-    string = string.replaceAll(',', '');
-    string = String(+string);  // Remove leading 0s and convert '' to 0
+    if (typeof string === 'string') {
+        string = string.replaceAll(',', '');
+    }
+
+    string = String(+string);  // Remove leading 0s
     string = addCommaSeparators(string);
     return string;
 }
