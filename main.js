@@ -54,7 +54,7 @@ function handleButtonClick(event) {
             break;
 
         case 'decimal-separator':
-            // TODO
+            handleDecimalSeparatorClick();
             break;
 
         case 'negate':
@@ -93,6 +93,22 @@ function handleDigitClick(buttonId) {
     }
 }
 
+function handleDecimalSeparatorClick() {
+
+    if (shouldConcatenateLeftOperand()) {
+
+        if (!state.leftOperand.includes('.')) {
+            state.leftOperand += '.';
+        }
+
+    } else {
+
+        if (!state.rightOperand.includes('.')) {
+            state.leftOperand += '.';
+        }
+    }
+}
+
 function handleNegateClick() {
 
     if (shouldConcatenateLeftOperand()) {
@@ -117,9 +133,16 @@ function shouldConcatenateLeftOperand() {
 }
 
 function formatOperand(operand) {
+    const endsWithDecimalSeparator = operand.endsWith('.');
+
     operand = unformatOperand(operand);
     operand = String(operand);
     operand = addCommaSeparators(operand);
+
+    if (endsWithDecimalSeparator) {
+        operand += '.';
+    }
+
     return operand;
 }
 
