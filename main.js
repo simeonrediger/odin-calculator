@@ -6,7 +6,7 @@ const state = {
         state.operator = null;
         state.rightOperand = null;
         state.result = null;
-        state.lastAction = null;
+        state.lastAction = 'reset';
     },
 };
 
@@ -35,7 +35,7 @@ function handleButtonClick(event) {
 
     switch (buttonId) {
         case 'clear-all':
-            // TODO
+            state.reset();
             break;
 
         case 'backspace':
