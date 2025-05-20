@@ -47,7 +47,7 @@ function handleButtonClick(event) {
         case 'multiply':
         case 'divide':
         case 'raise':
-            // TODO
+            handleOperatorClick(buttonId);
             break;
 
         case 'evaluate':
@@ -73,7 +73,11 @@ function updateDisplay() {
     let operation = formatOperand(state.leftOperand);
 
     if (state.operator) {
-        operation += state.operator;
+        const operatorSymbol = (
+            document.getElementById(state.operator).textContent
+        );
+
+        operation += operatorSymbol;
     }
 
     if (state.rightOperand) {
@@ -155,6 +159,11 @@ function handleNegateClick() {
 
         state.lastAction = 'updateRightOperand';
     }
+}
+
+function handleOperatorClick(buttonId) {
+    state.operator = buttonId;
+    state.lastAction = 'updateOperator';
 }
 
 function shouldConcatenateLeftOperand() {
