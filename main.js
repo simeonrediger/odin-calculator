@@ -65,14 +65,14 @@ function handleButtonClick(event) {
 }
 
 function updateDisplay() {
-    let operation = state.leftOperand;
+    let operation = formatOperand(state.leftOperand);
 
     if (state.operator) {
         operation += state.operator;
     }
 
     if (state.rightOperand) {
-        operation += state.rightOperand;
+        operation += formatOperand(state.rightOperand);
     }
 
     document.getElementById('current-operation').textContent = operation;
@@ -91,4 +91,42 @@ function handleDigitClick(buttonId) {
 
 function shouldConcatenateLeftOperand() {
     return state.operator === null;
+}
+
+function formatOperand(operand) {
+    if (typeof operand === 'string') {
+        operand = operand.replaceAll(',', '');
+    }
+
+    operand = String(+operand);  // Remove leading 0s
+    operand = addCommaSeparators(operand);
+    return operand;
+}
+
+function addCommaSeparators(operand) {
+    let [integerPart, decimalPart] = operand.split('.');
+
+    integerPart = Array.from(integerPart).reduceRight(
+        (commaSeparatedInteger, digit, i) => {
+
+            if (
+                integerPart.length > 3 &&
+                integerPart.length - i > 3 &&
+                (integerPart.length - i) % 3 === 1
+            ) {
+                commaSeparatedInteger = `${digit},` + commaSeparatedInteger;
+            } else {
+                commaSeparatedInteger = digit + commaSeparatedInteger;
+            }
+
+            return commaSeparatedInteger;
+        },
+        ''
+    );
+
+    if (operand.includes('.')) {
+        return integerPart + '.' + (decimalPart ?? '');
+    } else {
+        return integerPart;
+    }
 }
