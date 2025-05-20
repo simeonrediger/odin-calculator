@@ -58,7 +58,7 @@ function handleButtonClick(event) {
             break;
 
         default:  // Digit buttons
-            // TODO
+            handleDigitClick(buttonId);
     }
 
     updateDisplay();
@@ -76,4 +76,19 @@ function updateDisplay() {
     }
 
     document.getElementById('current-operation').textContent = operation;
+}
+
+function handleDigitClick(buttonId) {
+    const digit = String(buttonId);
+
+    if (shouldConcatenateLeftOperand()) {
+        state.leftOperand += digit;
+    }  else {
+        state.rightOperand = state.rightOperand ?? '';
+        state.rightOperand += digit;
+    }
+}
+
+function shouldConcatenateLeftOperand() {
+    return state.operator === null;
 }
