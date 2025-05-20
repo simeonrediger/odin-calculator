@@ -89,7 +89,17 @@ function handleDigitClick(buttonId) {
         state.leftOperand += digit;
         state.lastAction = 'updateLeftOperand';
     }  else {
-        state.rightOperand = (state.rightOperand ?? '') + digit;
+
+        if (rightOperandIsNegative()) {
+            state.rightOperand = (
+                state.rightOperand.slice(0, -1) +
+                digit +
+                state.rightOperand.slice(-1)
+            );
+        } else {
+            state.rightOperand = (state.rightOperand ?? '') + digit;
+        }
+
         state.lastAction = 'updateRightOperand';
     }
 }
@@ -106,7 +116,17 @@ function handleDecimalSeparatorClick() {
     } else {
 
         if (!state.rightOperand.includes('.')) {
-            state.leftOperand += '.';
+
+            if (rightOperandIsNegative()) {
+                state.rightOperand = (
+                    state.rightOperand.slice(0, -1) +
+                    '.' +
+                    state.rightOperand.slice(-1)
+                );
+            } else {
+                state.leftOperand += '.';
+            }
+
             state.lastAction = 'updateRightOperand';
         }
     }
@@ -126,7 +146,7 @@ function handleNegateClick() {
 
     } else {
 
-        if (state.rightOperand.startsWith('-')) {
+        if (rightOperandIsNegative()) {
             state.rightOperand = state.rightOperand.slice(2, -1);
         } else {
             state.rightOperand = `(-${state.rightOperand})`;
@@ -138,6 +158,10 @@ function handleNegateClick() {
 
 function shouldConcatenateLeftOperand() {
     return state.operator === null;
+}
+
+function rightOperandIsNegative() {
+    return state.rightOperand.startsWith('-');
 }
 
 function formatOperand(operand) {
