@@ -1,3 +1,16 @@
+const state = {
+
+    reset() {
+        // 'state' referenced explicitly to avoid incorrect 'this' binding
+        state.leftOperand = '0';
+        state.operator = null;
+        state.rightOperand = null;
+        state.result = null;
+        state.shouldOverwriteDisplay = false;
+    },
+};
+
+state.reset();
 displayCurrentTime();
 
 function displayCurrentTime() {
