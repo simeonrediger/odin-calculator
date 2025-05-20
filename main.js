@@ -94,13 +94,14 @@ function shouldConcatenateLeftOperand() {
 }
 
 function formatOperand(operand) {
-    if (typeof operand === 'string') {
-        operand = operand.replaceAll(',', '');
-    }
-
-    operand = String(+operand);  // Remove leading 0s
+    operand = unformatOperand(operand);
+    operand = String(operand);
     operand = addCommaSeparators(operand);
     return operand;
+}
+
+function unformatOperand(operand) {
+    return +operand.replaceAll(',', '');  // Coercion removes leading zeros
 }
 
 function addCommaSeparators(operand) {
