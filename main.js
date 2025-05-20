@@ -11,6 +11,7 @@ const state = {
 };
 
 state.reset();
+updateDisplay();
 displayCurrentTime();
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
 
