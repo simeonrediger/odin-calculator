@@ -129,7 +129,7 @@ function handleDecimalSeparatorClick() {
                     state.rightOperand.slice(-1)
                 );
             } else {
-                state.leftOperand += '.';
+                state.rightOperand += '.';
             }
 
             state.lastAction = 'updateRightOperand';
@@ -171,7 +171,7 @@ function shouldConcatenateLeftOperand() {
 }
 
 function rightOperandIsNegative() {
-    return state.rightOperand.startsWith('-');
+    return state.rightOperand?.startsWith('-');
 }
 
 function formatOperand(operand) {
