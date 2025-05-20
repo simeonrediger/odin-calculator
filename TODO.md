@@ -1,3 +1,5 @@
+- make handleDigitClick's rightOperand update more concise
+- support concatenation to negative right operand
 - function operate(operator, operand1, operan2)
 - evaluate on operator click if not first operator
 - round answers or scale down font size to prevent overflow

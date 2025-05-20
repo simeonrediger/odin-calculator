@@ -6,7 +6,7 @@ const state = {
         state.operator = null;
         state.rightOperand = null;
         state.result = null;
-        state.shouldOverwriteDisplay = false;
+        state.lastAction = null;
     },
 };
 
@@ -87,9 +87,11 @@ function handleDigitClick(buttonId) {
 
     if (shouldConcatenateLeftOperand()) {
         state.leftOperand += digit;
+        state.lastAction = 'updateLeftOperand';
     }  else {
         state.rightOperand = state.rightOperand ?? '';
         state.rightOperand += digit;
+        state.lastAction = 'updateRightOperand';
     }
 }
 
@@ -99,12 +101,14 @@ function handleDecimalSeparatorClick() {
 
         if (!state.leftOperand.includes('.')) {
             state.leftOperand += '.';
+            state.lastAction = 'updateLeftOperand';
         }
 
     } else {
 
         if (!state.rightOperand.includes('.')) {
             state.leftOperand += '.';
+            state.lastAction = 'updateRightOperand';
         }
     }
 }
@@ -118,6 +122,9 @@ function handleNegateClick() {
         } else {
             state.leftOperand = `-${state.leftOperand}`;
         }
+
+        state.lastAction = 'updateLeftOperand';
+
     } else {
 
         if (state.rightOperand.startsWith('-')) {
@@ -125,6 +132,8 @@ function handleNegateClick() {
         } else {
             state.rightOperand = `(-${state.rightOperand})`;
         }
+
+        state.lastAction = 'updateRightOperand';
     }
 }
 
