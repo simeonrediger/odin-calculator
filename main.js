@@ -57,6 +57,10 @@ function handleButtonClick(event) {
             // TODO
             break;
 
+        case 'negate':
+            handleNegateClick();
+            break;
+
         default:  // Digit buttons
             handleDigitClick(buttonId);
     }
@@ -86,6 +90,25 @@ function handleDigitClick(buttonId) {
     }  else {
         state.rightOperand = state.rightOperand ?? '';
         state.rightOperand += digit;
+    }
+}
+
+function handleNegateClick() {
+
+    if (shouldConcatenateLeftOperand()) {
+
+        if (state.leftOperand.startsWith('-')) {
+            state.leftOperand = state.leftOperand.slice(1);
+        } else {
+            state.leftOperand = `-${state.leftOperand}`;
+        }
+    } else {
+
+        if (state.rightOperand.startsWith('-')) {
+            state.rightOperand = state.rightOperand.slice(2, -1);
+        } else {
+            state.rightOperand = `(-${state.rightOperand})`;
+        }
     }
 }
 
