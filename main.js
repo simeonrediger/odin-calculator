@@ -124,7 +124,8 @@ function formatOperand(operand) {
 }
 
 function unformatOperand(operand) {
-    return +operand.replaceAll(',', '');  // Coercion removes leading zeros
+    // Removes leading zeros (via coercion), commas, and parentheses
+    return +operand.replaceAll(',|\(|\)', '');
 }
 
 function addCommaSeparators(operand) {
