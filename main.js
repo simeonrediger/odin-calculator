@@ -60,4 +60,20 @@ function handleButtonClick(event) {
         default:  // Digit buttons
             // TODO
     }
+
+    updateDisplay();
+}
+
+function updateDisplay() {
+    let operation = state.leftOperand;
+
+    if (state.operator) {
+        operation += state.operator;
+    }
+
+    if (state.rightOperand) {
+        operation += state.rightOperand;
+    }
+
+    document.getElementById('current-operation').textContent = operation;
 }
