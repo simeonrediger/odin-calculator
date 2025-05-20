@@ -12,6 +12,7 @@ const state = {
 
 state.reset();
 displayCurrentTime();
+document.querySelector('#buttons').addEventListener('click', handleButtonClick);
 
 function displayCurrentTime() {
     const timeDisplay = document.querySelector('#time');
@@ -22,4 +23,41 @@ function displayCurrentTime() {
     })
     .replace(/\s+(AM|PM)/, '')    // Remove meridiem indicator
     .replace(/0(?=[0-9]:)/, '');  // Remove left-padding 0 from hour
+}
+
+function handleButtonClick(event) {
+    if (event.target.tagName !== 'BUTTON') {
+        return;
+    }
+
+    const buttonId = event.target.id;
+
+    switch (buttonId) {
+        case 'clear-all':
+            // TODO
+            break;
+
+        case 'backspace':
+            // TODO
+            break;
+
+        case 'add':
+        case 'subtract':
+        case 'multiply':
+        case 'divide':
+        case 'raise':
+            // TODO
+            break;
+
+        case 'evaluate':
+            // TODO
+            break;
+
+        case 'decimal-separator':
+            // TODO
+            break;
+
+        default:  // Digit buttons
+            // TODO
+    }
 }
