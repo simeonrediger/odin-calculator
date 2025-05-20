@@ -1,4 +1,3 @@
-- make handleDigitClick's rightOperand update more concise
 - support concatenation to negative right operand
 - function operate(operator, operand1, operan2)
 - evaluate on operator click if not first operator

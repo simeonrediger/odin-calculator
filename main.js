@@ -89,8 +89,7 @@ function handleDigitClick(buttonId) {
         state.leftOperand += digit;
         state.lastAction = 'updateLeftOperand';
     }  else {
-        state.rightOperand = state.rightOperand ?? '';
-        state.rightOperand += digit;
+        state.rightOperand = (state.rightOperand ?? '') + digit;
         state.lastAction = 'updateRightOperand';
     }
 }
