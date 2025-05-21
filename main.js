@@ -52,7 +52,7 @@ function handleButtonClick(event) {
             break;
 
         case 'evaluate':
-            // TODO
+            handleEvaluateClick();
             break;
 
         case 'decimal-separator':
@@ -186,6 +186,43 @@ function handleOperatorClick(buttonId) {
     state.lastAction = 'updateOperator';
 }
 
+function handleEvaluateClick() {
+    evaluate();
+}
+
+function evaluate() {
+    const leftOperand = +state.leftOperand;
+    const rightOperand = +state.rightOperand;
+
+    switch (state.operator) {
+
+        case 'add':
+            state.result = leftOperand + rightOperand;
+            break;
+
+        case 'subtract':
+            state.result = leftOperand - rightOperand;
+            break;
+
+        case 'multiply':
+            state.result = leftOperand * rightOperand;
+            break;
+
+        case 'divide':
+            state.result = leftOperand / rightOperand;
+            break;
+
+        case 'raise':
+            state.result = leftOperand ** rightOperand;
+    }
+
+    state.rightOperand = null;
+    state.operator = null;
+    state.leftOperand = state.result;
+    state.precedingToken = 'leftOperand';
+    state.lastAction = 'evaluate';
+}
+
 function handleBackspaceClick() {
 
     if (state.lastAction === 'evaluate') {
@@ -240,10 +277,11 @@ function rightOperandIsNegative() {
 }
 
 function formatOperand(operand) {
+    console.log(operand, typeof operand);
+    operand = String(operand);
     const endsWithDecimalSeparator = operand.endsWith('.');
 
     operand = unformatOperand(operand);
-    operand = String(operand);
     operand = addCommaSeparators(operand);
 
     if (endsWithDecimalSeparator) {
@@ -255,7 +293,7 @@ function formatOperand(operand) {
 
 function unformatOperand(operand) {
     // Removes leading zeros (via coercion), commas, and parentheses
-    return +operand.replaceAll(',|\(|\)', '');
+    return String(+operand.replaceAll(',|\(|\)', ''));
 }
 
 function addCommaSeparators(operand) {
