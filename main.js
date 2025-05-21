@@ -90,6 +90,11 @@ function updateDisplay() {
 }
 
 function handleDigitClick(buttonId) {
+
+    if (state.lastAction === 'evaluate') {
+        state.reset();
+    }
+
     const digit = String(buttonId);
 
     if (shouldConcatenateLeftOperand()) {
