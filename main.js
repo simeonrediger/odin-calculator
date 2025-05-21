@@ -40,7 +40,7 @@ function handleButtonClick(event) {
             break;
 
         case 'backspace':
-            // TODO
+            handleBackspaceClick();
             break;
 
         case 'add':
@@ -71,6 +71,7 @@ function handleButtonClick(event) {
 }
 
 function updateDisplay() {
+    console.debug(state);
     let operation = formatOperand(state.leftOperand);
 
     if (state.operator) {
@@ -183,6 +184,46 @@ function handleOperatorClick(buttonId) {
     state.operator = buttonId;
     state.precedingToken = 'operator';
     state.lastAction = 'updateOperator';
+}
+
+function handleBackspaceClick() {
+
+    if (state.lastAction === 'evaluate') {
+        state.clear();
+        return;
+    }
+
+    switch (state.precedingToken) {
+
+        case 'leftOperand':
+            state.leftOperand = state.leftOperand.slice(0, -1);
+
+            if (!state.leftOperand) {
+                state.precedingToken = null;
+            }
+
+            state.lastAction = 'updateLeftOperand';
+            break;
+
+        case 'operator':
+            state.operator = null;
+            state.precedingToken = 'leftOperand';
+            state.lastAction = 'updateOperator';
+            break;
+
+        case 'rightOperand':
+            state.rightOperand = state.rightOperand.slice(0, -1);
+
+            if (!state.rightOperand) {
+                state.precedingToken = 'operator';
+            }
+
+            state.lastAction = 'updateRightOperand';
+            break;
+
+        case 'evaluate':
+            state.reset();
+    }
 }
 
 function shouldConcatenateLeftOperand() {
