@@ -226,7 +226,7 @@ function evaluate() {
 function handleBackspaceClick() {
 
     if (state.lastAction === 'evaluate') {
-        state.clear();
+        state.reset();
         return;
     }
 
@@ -277,7 +277,6 @@ function rightOperandIsNegative() {
 }
 
 function formatOperand(operand) {
-    console.log(operand, typeof operand);
     operand = String(operand);
     const endsWithDecimalSeparator = operand.endsWith('.');
 
