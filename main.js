@@ -296,10 +296,15 @@ function rightOperandIsNegative() {
 
 function formatOperand(operand) {
     operand = String(operand);
+    const isNegativeZero = +operand === 0 && operand.startsWith('-');
     const endsWithDecimalSeparator = operand.endsWith('.');
 
     operand = unformatOperand(operand);
     operand = addCommaSeparators(operand);
+
+    if (isNegativeZero) {
+        operand = '-' + operand;
+    }
 
     if (endsWithDecimalSeparator) {
         operand += '.';
