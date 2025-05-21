@@ -121,6 +121,10 @@ function handleDigitClick(buttonId) {
 
 function handleDecimalSeparatorClick() {
 
+    if (state.lastAction === 'evaluate') {
+        state.reset();
+    }
+
     if (shouldConcatenateLeftOperand()) {
 
         if (!state.leftOperand.includes('.')) {
@@ -150,6 +154,10 @@ function handleDecimalSeparatorClick() {
 }
 
 function handleNegateClick() {
+
+    if (state.lastAction === 'evaluate') {
+        state.reset();
+    }
 
     if (shouldConcatenateLeftOperand()) {
 
