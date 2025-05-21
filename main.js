@@ -6,6 +6,7 @@ const state = {
         state.operator = null;
         state.rightOperand = null;
         state.result = null;
+        state.precedingToken = null;
         state.lastAction = 'reset';
     },
 };
@@ -92,7 +93,9 @@ function handleDigitClick(buttonId) {
 
     if (shouldConcatenateLeftOperand()) {
         state.leftOperand += digit;
+        state.precedingToken = 'leftOperand';
         state.lastAction = 'updateLeftOperand';
+
     }  else {
 
         if (rightOperandIsNegative()) {
@@ -105,6 +108,7 @@ function handleDigitClick(buttonId) {
             state.rightOperand = (state.rightOperand ?? '') + digit;
         }
 
+        state.precedingToken = 'rightOperand';
         state.lastAction = 'updateRightOperand';
     }
 }
@@ -115,6 +119,7 @@ function handleDecimalSeparatorClick() {
 
         if (!state.leftOperand.includes('.')) {
             state.leftOperand += '.';
+            state.precedingToken = 'leftOperand';
             state.lastAction = 'updateLeftOperand';
         }
 
@@ -132,6 +137,7 @@ function handleDecimalSeparatorClick() {
                 state.rightOperand += '.';
             }
 
+            state.precedingToken = 'rightOperand';
             state.lastAction = 'updateRightOperand';
         }
     }
@@ -147,6 +153,12 @@ function handleNegateClick() {
             state.leftOperand = `-${state.leftOperand}`;
         }
 
+        if (state.leftOperand) {
+            state.precedingToken = 'leftOperand';
+        } else {
+            state.precedingToken = null;
+        }
+
         state.lastAction = 'updateLeftOperand';
 
     } else {
@@ -157,12 +169,19 @@ function handleNegateClick() {
             state.rightOperand = `(-${state.rightOperand})`;
         }
 
+        if (state.rightOperand) {
+            state.precedingToken = 'rightOperand';
+        } else {
+            state.precedingToken = 'operator';
+        }
+
         state.lastAction = 'updateRightOperand';
     }
 }
 
 function handleOperatorClick(buttonId) {
     state.operator = buttonId;
+    state.precedingToken = 'operator';
     state.lastAction = 'updateOperator';
 }
 
