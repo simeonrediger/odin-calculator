@@ -196,6 +196,11 @@ function handleEvaluateClick() {
 }
 
 function evaluate() {
+
+    if (!state.rightOperand) {
+        return;
+    }
+
     const leftOperand = +state.leftOperand;
     const rightOperand = +state.rightOperand;
 
