@@ -7,7 +7,7 @@ const state = {
         state.rightOperand = null;
         state.result = null;
         state.precedingToken = null;
-        state.lastAction = 'reset';
+        state.lastAction = 'updateLeftOperand';
     },
 };
 
@@ -196,6 +196,11 @@ function handleBackspaceClick() {
     switch (state.precedingToken) {
 
         case 'leftOperand':
+
+            if (state.leftOperand === '0') {
+                return;
+            }
+
             state.leftOperand = state.leftOperand.slice(0, -1);
 
             if (!state.leftOperand) {
