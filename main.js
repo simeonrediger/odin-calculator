@@ -234,9 +234,9 @@ function evaluate() {
             state.result = leftOperand ** rightOperand;
     }
 
-    state.rightOperand = null;
-    state.operator = null;
     state.leftOperand = state.result;
+    state.operator = null;
+    state.rightOperand = null;
     state.precedingToken = 'leftOperand';
     state.lastAction = 'evaluate';
 }

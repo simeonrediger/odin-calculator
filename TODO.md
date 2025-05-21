@@ -1,4 +1,5 @@
-- fix backspace behavior for: decimal > backspace > backspace > decimal
+- fix right operand negation
+- fix second operator click before evaluation
 - support concatenation to negative right operand
 - function operate(operator, operand1, operan2)
 - evaluate on operator click if not first operator
