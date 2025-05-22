@@ -276,16 +276,14 @@ function handleBackspaceClick() {
 
                 if (+state.rightOperand === 0) {
                     state.rightOperand = '0';
-                    return;
-                }
 
-                if (state.rightOperand.length === 2) {
+                } else if (state.rightOperand.length === 2) {
                     state.rightOperand = '-0';
-                    return;
                 }
-            }
 
-            state.rightOperand = state.rightOperand.slice(0, -1);
+            } else {
+                state.rightOperand = state.rightOperand.slice(0, -1);
+            }
 
             if (!state.rightOperand) {
                 state.precedingToken = 'operator';
