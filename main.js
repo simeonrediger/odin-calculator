@@ -104,17 +104,7 @@ function handleDigitClick(buttonId) {
         state.lastAction = 'updateLeftOperand';
 
     }  else {
-
-        if (operandIsNegative(state.rightOperand)) {
-            state.rightOperand = (
-                state.rightOperand.slice(0, -1) +
-                digit +
-                state.rightOperand.slice(-1)
-            );
-        } else {
-            state.rightOperand = (state.rightOperand ?? '') + digit;
-        }
-
+        state.rightOperand = (state.rightOperand ?? '') + digit;
         state.precedingToken = 'rightOperand';
         state.lastAction = 'updateRightOperand';
     }

@@ -1,6 +1,6 @@
-- add explicit break to final case of each switch block
-- support concatenation to negative right operand
-- function operate(operator, operand1, operan2)
+- fix backspace behavior with negative operands
+- fix concatenation to negative right operand
+- function operate(operator, operand1, operand2)
 - evaluate on operator click if not first operator
 - round answers or scale down font size to prevent overflow
 - handle premature evaluation click
