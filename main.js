@@ -347,6 +347,8 @@ function unformatOperand(operand) {
 
 function addCommaSeparators(operand) {
     let [integerPart, decimalPart] = operand.split('.');
+    const isNegative = integerPart.startsWith('-');
+    integerPart = integerPart.replaceAll('-', '');
 
     integerPart = Array.from(integerPart).reduceRight(
         (commaSeparatedInteger, digit, i) => {
@@ -365,6 +367,10 @@ function addCommaSeparators(operand) {
         },
         ''
     );
+
+    if (isNegative) {
+        integerPart = `-${integerPart}`;
+    }
 
     if (operand.includes('.')) {
         return integerPart + '.' + (decimalPart ?? '');
