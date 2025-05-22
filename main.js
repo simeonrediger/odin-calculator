@@ -127,17 +127,7 @@ function handleDecimalSeparatorClick() {
     } else {
 
         if (!state.rightOperand.includes('.')) {
-
-            if (operandIsNegative(state.rightOperand)) {
-                state.rightOperand = (
-                    state.rightOperand.slice(0, -1) +
-                    '.' +
-                    state.rightOperand.slice(-1)
-                );
-            } else {
-                state.rightOperand += '.';
-            }
-
+            state.rightOperand += '.';
             state.precedingToken = 'rightOperand';
             state.lastAction = 'updateRightOperand';
         }
