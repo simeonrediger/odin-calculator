@@ -310,12 +310,25 @@ function formatOperand(operand) {
         operand += '.';
     }
 
+    if (isRightOperand && isNegative) {
+        operand = `(${operand})`;
+    }
+
     return operand;
 }
 
 function unformatOperand(operand) {
     // Removes leading zeros (via coercion), commas, and parentheses
-    return String(+operand.replaceAll(',|\(|\)', ''));
+    console.log(operand
+        .replaceAll(',', '')
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+    );
+    return String(+operand
+        .replaceAll(',', '')
+        .replaceAll('(', '')
+        .replaceAll(')', '')
+    );
 }
 
 function addCommaSeparators(operand) {
