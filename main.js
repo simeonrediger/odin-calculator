@@ -161,7 +161,12 @@ function handleNegateClick() {
         if (operandIsNegative(state.rightOperand)) {
             state.rightOperand = state.rightOperand.slice(1);
         } else {
-            state.rightOperand = `-${state.rightOperand}`;
+
+            if (state.rightOperand === null) {
+                state.rightOperand = '-0';
+            } else {
+                state.rightOperand = `-${state.rightOperand}`;
+            }
         }
 
         if (state.rightOperand) {

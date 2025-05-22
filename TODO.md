@@ -1,4 +1,5 @@
-- fix right operand initial negate behavior
+- fix premature returns in backspace (and maybe other) functions
+- fix decimal separators on negative operands
 - fix right operand first digit backspace behavior
 - fix backspace behavior with negative right operand
 - fix leading zeros in operand values
