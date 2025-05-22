@@ -196,6 +196,11 @@ function handleNegateClick() {
 }
 
 function handleOperatorClick(buttonId) {
+
+    if (state.lastAction === 'updateRightOperand') {
+        evaluate();
+    }
+
     state.operator = buttonId;
     state.precedingToken = 'operator';
     state.lastAction = 'updateOperator';

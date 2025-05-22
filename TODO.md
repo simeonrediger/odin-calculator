@@ -1,5 +1,5 @@
-- fix right operand negation
 - fix second operator click before evaluation
+- add explicit break to final case of each switch block
 - support concatenation to negative right operand
 - function operate(operator, operand1, operan2)
 - evaluate on operator click if not first operator
