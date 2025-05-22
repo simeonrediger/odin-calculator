@@ -83,7 +83,7 @@ function updateDisplay() {
     }
 
     if (state.rightOperand) {
-        operation += formatOperand(state.rightOperand);
+        operation += formatOperand(state.rightOperand, true);
     }
 
     document.getElementById('current-operation').textContent = operation;
@@ -104,7 +104,7 @@ function handleDigitClick(buttonId) {
 
     }  else {
 
-        if (rightOperandIsNegative()) {
+        if (operandIsNegative(state.rightOperand)) {
             state.rightOperand = (
                 state.rightOperand.slice(0, -1) +
                 digit +
@@ -137,7 +137,7 @@ function handleDecimalSeparatorClick() {
 
         if (!state.rightOperand.includes('.')) {
 
-            if (rightOperandIsNegative()) {
+            if (operandIsNegative(state.rightOperand)) {
                 state.rightOperand = (
                     state.rightOperand.slice(0, -1) +
                     '.' +
@@ -161,7 +161,7 @@ function handleNegateClick() {
 
     if (shouldConcatenateLeftOperand()) {
 
-        if (state.leftOperand.startsWith('-')) {
+        if (operandIsNegative(state.leftOperand)) {
             state.leftOperand = state.leftOperand.slice(1);
         } else {
             state.leftOperand = `-${state.leftOperand}`;
@@ -177,10 +177,12 @@ function handleNegateClick() {
 
     } else {
 
-        if (rightOperandIsNegative()) {
-            state.rightOperand = state.rightOperand.slice(2, -1);
+        if (operandIsNegative(state.rightOperand)) {
+            // state.rightOperand = state.rightOperand.slice(2, -1);
+            state.rightOperand = state.rightOperand.slice(1);
         } else {
-            state.rightOperand = `(-${state.rightOperand})`;
+            // state.rightOperand = `(-${state.rightOperand})`;
+            state.rightOperand = `-${state.rightOperand}`;
         }
 
         if (state.rightOperand) {
@@ -290,19 +292,20 @@ function shouldConcatenateLeftOperand() {
     return state.operator === null;
 }
 
-function rightOperandIsNegative() {
-    return state.rightOperand?.startsWith('-');
+function operandIsNegative(operand) {
+    return operand?.startsWith('-');
 }
 
-function formatOperand(operand) {
+function formatOperand(operand, isRightOperand = false) {
     operand = String(operand);
-    const isNegativeZero = +operand === 0 && operand.startsWith('-');
+    const isNegative = operandIsNegative(operand);
+    const isZero = +operand === 0;
     const endsWithDecimalSeparator = operand.endsWith('.');
 
     operand = unformatOperand(operand);
     operand = addCommaSeparators(operand);
 
-    if (isNegativeZero) {
+    if (isNegative && isZero) {
         operand = '-' + operand;
     }
 
