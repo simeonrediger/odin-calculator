@@ -28,6 +28,7 @@ function displayCurrentTime() {
 }
 
 function handleButtonClick(event) {
+
     if (event.target.tagName !== 'BUTTON') {
         return;
     }
