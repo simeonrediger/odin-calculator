@@ -169,10 +169,8 @@ function handleNegateClick() {
     } else {
 
         if (operandIsNegative(state.rightOperand)) {
-            // state.rightOperand = state.rightOperand.slice(2, -1);
             state.rightOperand = state.rightOperand.slice(1);
         } else {
-            // state.rightOperand = `(-${state.rightOperand})`;
             state.rightOperand = `-${state.rightOperand}`;
         }
 
@@ -320,11 +318,6 @@ function formatOperand(operand, isRightOperand = false) {
 
 function unformatOperand(operand) {
     // Removes leading zeros (via coercion), commas, and parentheses
-    console.log(operand
-        .replaceAll(',', '')
-        .replaceAll('(', '')
-        .replaceAll(')', '')
-    );
     return String(+operand
         .replaceAll(',', '')
         .replaceAll('(', '')
