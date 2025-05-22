@@ -65,6 +65,7 @@ function handleButtonClick(event) {
 
         default:  // Digit buttons
             handleDigitClick(buttonId);
+            break;
     }
 
     updateDisplay();
@@ -239,6 +240,7 @@ function evaluate() {
 
         case 'raise':
             state.result = leftOperand ** rightOperand;
+            break;
     }
 
     state.leftOperand = state.result;
@@ -290,6 +292,7 @@ function handleBackspaceClick() {
 
         case 'evaluate':
             state.reset();
+            break;
     }
 }
 
