@@ -282,7 +282,13 @@ function handleBackspaceClick() {
                 }
 
             } else {
-                state.rightOperand = state.rightOperand.slice(0, -1);
+
+                if (state.rightOperand.length === 1) {
+                    state.rightOperand = null;
+
+                } else {
+                    state.rightOperand = state.rightOperand.slice(0, -1);
+                }
             }
 
             if (!state.rightOperand) {
