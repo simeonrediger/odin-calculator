@@ -1,17 +1,10 @@
-- fix backspace behavior with negative operands
-- fix concatenation to negative right operand
-- function operate(operator, operand1, operand2)
-- evaluate on operator click if not first operator
-- round answers or scale down font size to prevent overflow
-- handle premature evaluation click
+- fix right operand initial negate behavior
+- fix right operand first digit backspace behavior
+- fix backspace behavior with negative right operand
+- fix leading zeros in operand values
+- round results or scale down font size to prevent overflow
 - handle division by 0 (display error message)
-- handle consecutive operator click (only use last operator clicked)
-- handle number click immediately after evaluation (should start new operation)
-- disable the decimal-separator when one is already in current operand
 - add keyboard support
-
 - update current time continuously
-- add decimal separator to end of integer when typed
 - handle float imprecision (e.g., 0.1 + 0.2) if not already handled by rounding
-- reduce hover overlay opacity
 - add accessibility features

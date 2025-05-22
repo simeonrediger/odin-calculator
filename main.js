@@ -243,6 +243,12 @@ function handleBackspaceClick() {
                 return;
             }
 
+            if (state.leftOperand.length === 2 &&
+                operandIsNegative(state.leftOperand)) {
+                state.reset();
+                return;
+            }
+
             state.leftOperand = state.leftOperand.slice(0, -1);
 
             if (!state.leftOperand) {
@@ -259,6 +265,20 @@ function handleBackspaceClick() {
             break;
 
         case 'rightOperand':
+
+            if (operandIsNegative(state.rightOperand)) {
+
+                if (+state.rightOperand === 0) {
+                    state.rightOperand = '0';
+                    return;
+                }
+
+                if (state.rightOperand.length === 2) {
+                    state.rightOperand = '-0';
+                    return;
+                }
+            }
+
             state.rightOperand = state.rightOperand.slice(0, -1);
 
             if (!state.rightOperand) {
