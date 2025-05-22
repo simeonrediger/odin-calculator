@@ -100,11 +100,21 @@ function handleDigitClick(buttonId) {
     const digit = String(buttonId);
 
     if (shouldConcatenateLeftOperand()) {
+
+        if (buttonId === '0' && +state.leftOperand === 0) {
+            return;
+        }
+
         state.leftOperand += digit;
         state.precedingToken = 'leftOperand';
         state.lastAction = 'updateLeftOperand';
 
     }  else {
+
+        if (buttonId === '0' && +state.rightOperand === 0) {
+            return;
+        }
+
         state.rightOperand = (state.rightOperand ?? '') + digit;
         state.precedingToken = 'rightOperand';
         state.lastAction = 'updateRightOperand';

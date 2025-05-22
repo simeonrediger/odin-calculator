@@ -1,4 +1,3 @@
-- fix backspace behavior with negative right operand
 - fix leading zeros in operand values
 - round results or scale down font size to prevent overflow
 - handle division by 0 (display error message)
