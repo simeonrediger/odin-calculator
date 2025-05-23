@@ -1,4 +1,6 @@
 - fix leading zeros in operand values
+- allow for input of 0 to right operand
+
 - round results or scale down font size to prevent overflow
 - handle division by 0 (display error message)
 - add keyboard support

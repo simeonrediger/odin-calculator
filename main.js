@@ -111,7 +111,9 @@ function handleDigitClick(buttonId) {
 
     }  else {
 
-        if (buttonId === '0' && +state.rightOperand === 0) {
+        if (state.rightOperand &&
+            buttonId === '0' &&
+            +state.rightOperand === 0) {
             return;
         }
 
