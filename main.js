@@ -14,7 +14,9 @@ const state = {
 state.reset();
 updateDisplay();
 displayCurrentTime();
+
 document.querySelector('#buttons').addEventListener('click', handleButtonClick);
+document.body.addEventListener('keydown', handleKeyDown);
 
 function displayCurrentTime() {
     const timeDisplay = document.querySelector('#time');
@@ -68,6 +70,86 @@ function handleButtonClick(event) {
             default:  // Digit buttons
                 handleDigitClick(buttonId);
                 break;
+        }
+
+    } catch (error) {
+        return;
+    }
+
+    updateDisplay();
+}
+
+function handleKeyDown(event) {
+
+    try {
+        switch (event.key) {
+
+            case 'c':
+                if (event.ctrlKey) {
+                    state.reset();
+                }
+
+                break;
+
+            case 'Clear':
+                state.reset();
+                break;
+
+            case 'Delete':
+            case 'Backspace':
+                handleBackspaceClick();
+                break;
+
+            case '+':
+                handleOperatorClick('add');
+                break;
+
+            case '-':
+                if (event.altKey) {
+                    handleNegateClick();
+                } else {
+                    handleOperatorClick('subtract');
+                }
+
+                break;
+
+            case '*':
+                handleOperatorClick('multiply');
+                break;
+
+            case '/':
+                event.preventDefault();  // Prevent quick search
+                handleOperatorClick('divide');
+                break;
+
+            case '^':
+                handleOperatorClick('raise');
+                break;
+
+            case '=':
+            case 'Enter':
+                handleEvaluateClick();
+                break;
+
+            case '.':
+                handleDecimalSeparatorClick();
+                break;
+
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                handleDigitClick(event.key);
+                break;
+
+            default:
+                return;
         }
 
     } catch (error) {
