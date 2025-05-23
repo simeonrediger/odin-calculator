@@ -459,6 +459,10 @@ function formatOperand(operand, isRightOperand = false) {
         operand = `(${operand})`;
     }
 
+    if (!isRightOperand && operand.includes('.')) {
+        operand = Math.round(operand * 10 ** 6) / (10 ** 6);
+    }
+
     return operand;
 }
 

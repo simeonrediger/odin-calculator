@@ -1,5 +1,6 @@
 - round results or scale down font size to prevent overflow
-- add keyboard support
+- fix decimal input less than magnitude of 1
+- fix decimal display before tenths place
 
 - convert operands (and maybe operator) to objects
 - used named variables for complex boolean expressions
