@@ -35,38 +35,43 @@ function handleButtonClick(event) {
 
     const buttonId = event.target.id;
 
-    switch (buttonId) {
-        case 'clear-all':
-            state.reset();
-            break;
+    try {
+        switch (buttonId) {
+            case 'clear-all':
+                state.reset();
+                break;
 
-        case 'backspace':
-            handleBackspaceClick();
-            break;
+            case 'backspace':
+                handleBackspaceClick();
+                break;
 
-        case 'add':
-        case 'subtract':
-        case 'multiply':
-        case 'divide':
-        case 'raise':
-            handleOperatorClick(buttonId);
-            break;
+            case 'add':
+            case 'subtract':
+            case 'multiply':
+            case 'divide':
+            case 'raise':
+                handleOperatorClick(buttonId);
+                break;
 
-        case 'evaluate':
-            handleEvaluateClick();
-            break;
+            case 'evaluate':
+                handleEvaluateClick();
+                break;
 
-        case 'decimal-separator':
-            handleDecimalSeparatorClick();
-            break;
+            case 'decimal-separator':
+                handleDecimalSeparatorClick();
+                break;
 
-        case 'negate':
-            handleNegateClick();
-            break;
+            case 'negate':
+                handleNegateClick();
+                break;
 
-        default:  // Digit buttons
-            handleDigitClick(buttonId);
-            break;
+            default:  // Digit buttons
+                handleDigitClick(buttonId);
+                break;
+        }
+
+    } catch (error) {
+        return;
     }
 
     updateDisplay();
@@ -253,6 +258,12 @@ function evaluate() {
             break;
 
         case 'divide':
+
+            if (rightOperand === 0) {
+                handleDivisionByZero();
+                return;
+            }
+
             state.result = leftOperand / rightOperand;
             break;
 
@@ -411,4 +422,12 @@ function addCommaSeparators(operand) {
     } else {
         return integerPart;
     }
+}
+
+function handleDivisionByZero() {
+    state.reset();
+    document.getElementById('current-operation').textContent = (
+        'Undefined'
+    );
+    throw new Error('Cannot divide by 0');
 }
