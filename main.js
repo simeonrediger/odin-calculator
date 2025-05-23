@@ -73,7 +73,7 @@ function handleButtonClick(event) {
         }
 
     } catch (error) {
-        return;
+        throw error;
     }
 
     updateDisplay();
@@ -160,6 +160,7 @@ function handleKeyDown(event) {
 }
 
 function updateDisplay() {
+    console.log(state);
     let operation = formatOperand(state.leftOperand);
 
     if (state.operator) {
@@ -444,18 +445,9 @@ function formatOperand(operand, isRightOperand = false) {
     operand = String(operand);
     const isNegative = operandIsNegative(operand);
     const isZero = +operand === 0;
-    const endsWithDecimalSeparator = operand.endsWith('.');
 
     operand = unformatOperand(operand);
     operand = addCommaSeparators(operand);
-
-    if (isNegative && isZero) {
-        operand = '-' + operand;
-    }
-
-    if (endsWithDecimalSeparator) {
-        operand += '.';
-    }
 
     if (isRightOperand && isNegative) {
         operand = `(${operand})`;
@@ -468,15 +460,20 @@ function formatOperand(operand, isRightOperand = false) {
         operand = Math.round(operand * 10 ** 6) / (10 ** 6);
     }
 
+    if (String(operand).startsWith('.')) {
+        operand = '0' + operand;
+    }
+
     return operand;
 }
 
 function unformatOperand(operand) {
     // Removes leading zeros (via coercion), commas, and parentheses
-    return String(+operand
+    return String(operand
         .replaceAll(',', '')
         .replaceAll('(', '')
         .replaceAll(')', '')
+        .replaceAll(/^0+/g, '')
     );
 }
 

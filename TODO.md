@@ -1,3 +1,5 @@
+- Fix backspace behavior for negative decimal right operand
+
 - Convert operands (and maybe operator) to objects
 - Use named variables for complex boolean expressions
 - Update current time continuously
