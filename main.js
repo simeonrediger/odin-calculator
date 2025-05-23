@@ -160,7 +160,6 @@ function handleKeyDown(event) {
 }
 
 function updateDisplay() {
-    console.debug(state);
     let operation = formatOperand(state.leftOperand);
 
     if (state.operator) {
