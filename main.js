@@ -444,7 +444,6 @@ function operandIsNegative(operand) {
 function formatOperand(operand, isRightOperand = false) {
     operand = String(operand);
     const isNegative = operandIsNegative(operand);
-    const isZero = +operand === 0;
 
     operand = unformatOperand(operand);
     operand = addCommaSeparators(operand);
@@ -468,13 +467,18 @@ function formatOperand(operand, isRightOperand = false) {
 }
 
 function unformatOperand(operand) {
-    // Removes leading zeros (via coercion), commas, and parentheses
-    return String(operand
+
+    operand = String(operand
         .replaceAll(',', '')
         .replaceAll('(', '')
         .replaceAll(')', '')
-        .replaceAll(/^0+/g, '')
     );
+
+    if (operand !== '0' && operand !== '-0') {
+        operand = operand.replaceAll(/^0+/g, '');
+    }
+
+    return operand;
 }
 
 function addCommaSeparators(operand) {

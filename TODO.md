@@ -1,7 +1,8 @@
 - Fix backspace behavior for negative decimal right operand
+- Fix zero inputs after decimal place
 
-- Convert operands (and maybe operator) to objects
-- Use named variables for complex boolean expressions
+- Unspaghettify
+    - Convert operands (and maybe operator) to objects
+    - Use named variables for complex boolean expressions
 - Update current time continuously
-- Handle float imprecision (e.g., 0.1 + 0.2) if not already handled by rounding
 - Add accessibility features
