@@ -1,4 +1,3 @@
-- round results or scale down font size to prevent overflow
 - fix decimal input less than magnitude of 1
 - fix decimal display before tenths place
 
