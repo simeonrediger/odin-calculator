@@ -1,6 +1,5 @@
-- fix leading zeros in operand values
-- allow for input of 0 to right operand
-
+- convert operands (and maybe operator) to objects
+- used named variables for complex boolean expressions
 - round results or scale down font size to prevent overflow
 - handle division by 0 (display error message)
 - add keyboard support

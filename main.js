@@ -105,7 +105,18 @@ function handleDigitClick(buttonId) {
             return;
         }
 
-        state.leftOperand += digit;
+        if (+state.leftOperand === 0) {
+
+            if (operandIsNegative(state.leftOperand)) {
+                state.leftOperand = `-${digit}`;
+            } else {
+                state.leftOperand = digit;
+            }
+
+        } else {
+            state.leftOperand += digit;
+        }
+
         state.precedingToken = 'leftOperand';
         state.lastAction = 'updateLeftOperand';
 
@@ -117,7 +128,18 @@ function handleDigitClick(buttonId) {
             return;
         }
 
-        state.rightOperand = (state.rightOperand ?? '') + digit;
+        if (+state.rightOperand === 0) {
+
+            if (operandIsNegative(state.rightOperand)) {
+                state.rightOperand = `-${digit}`;
+            } else {
+                state.rightOperand = digit;
+            }
+
+        } else {
+            state.rightOperand = (state.rightOperand ?? '') + digit;
+        }
+
         state.precedingToken = 'rightOperand';
         state.lastAction = 'updateRightOperand';
     }
