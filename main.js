@@ -191,7 +191,7 @@ function handleDigitClick(buttonId) {
             return;
         }
 
-        if (+state.leftOperand === 0) {
+        if (+state.leftOperand === 0 && !state.leftOperand.includes('.')) {
 
             if (operandIsNegative(state.leftOperand)) {
                 state.leftOperand = `-${digit}`;
@@ -214,7 +214,9 @@ function handleDigitClick(buttonId) {
             return;
         }
 
-        if (+state.rightOperand === 0) {
+        if (+state.rightOperand === 0 &&
+            state.rightOperand &&
+            !state.rightOperand.includes('.')) {
 
             if (operandIsNegative(state.rightOperand)) {
                 state.rightOperand = `-${digit}`;
@@ -247,8 +249,8 @@ function handleDecimalSeparatorClick() {
 
     } else {
 
-        if (!state.rightOperand.includes('.')) {
-            state.rightOperand += '.';
+        if (!state.rightOperand?.includes('.')) {
+            state.rightOperand = (state.rightOperand ?? '0') + '.';
             state.precedingToken = 'rightOperand';
             state.lastAction = 'updateRightOperand';
         }
