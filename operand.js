@@ -184,7 +184,12 @@ export default class Operand {
 
     #roundToNearestMillionth(value) {
         const million = 10 ** 6;
-        value = Math.round(value * million) / million;
-        return String(value);
+        const roundedValue = Math.round(value * million) / million;
+
+        if (value.endsWith('.')) {
+            return String(roundedValue) + '.';
+        } else {
+            return String(roundedValue);
+        }
     }
 }
