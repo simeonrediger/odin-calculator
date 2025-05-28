@@ -159,7 +159,7 @@ export default class Operand {
 
     #addThousandsSeparators(value) {
 
-        const unitsPlaceIndex = () => {
+        const unitsPlaceIndex = (() => {
             const decimalSeparatorIndex = value.indexOf('.');
 
             if (decimalSeparatorIndex === -1) {
@@ -167,10 +167,16 @@ export default class Operand {
             } else {
                 return decimalSeparatorIndex - 1;
             }
-        };
+        })();
 
         for (let i = unitsPlaceIndex - 3; i >= 0; i -= 3) {
-            value = value.splice(i, 0, ',');
+            const indexToInsertCommaBefore = i + 1;
+
+            value = (
+                value.slice(0, indexToInsertCommaBefore) +
+                ',' +
+                value.slice(indexToInsertCommaBefore)
+            );
         }
 
         return value;
