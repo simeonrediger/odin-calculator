@@ -8,8 +8,9 @@ clock.displayCurrentTime();
 
 const leftOperand = new Operand();
 const operator = new Operator();
+console.log(operator);
 const rightOperand = new Operand(false);
 const calculator = new Calculator(leftOperand, operator, rightOperand);
 
 const buttons = document.querySelector('#buttons');
-buttons.addEventListener('click', calculator.handleClick);
+buttons.addEventListener('click', calculator.handleClick.bind(calculator));

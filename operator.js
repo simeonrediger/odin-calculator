@@ -10,7 +10,7 @@ export default class Operator {
 
     set id(value) {
 
-        if (!this.#validIds.includes(value)) {
+        if (!this.#validIds.includes(value) && value !== null) {
             throw new Error(`Invalid ID: ${value}`);
         }
 

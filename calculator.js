@@ -10,8 +10,10 @@ export default class Calculator {
     constructor(leftOperand, operator, rightOperand) {
         this.#leftOperand = leftOperand;
         this.#operator = operator;
+        console.log(this.#operator);
         this.#rightOperand = rightOperand;
         this.reset();
+        this.updateDisplay();
     }
 
     handleClick(event) {
@@ -36,7 +38,8 @@ export default class Calculator {
             case 'multiply':
             case 'divide':
             case 'raise':
-                this.handleOperatorClick(buttonId);
+                const operatorId = buttonId;
+                this.handleOperatorClick(operatorId);
                 break;
 
             case 'evaluate':
@@ -52,14 +55,21 @@ export default class Calculator {
                 break;
 
             default:  // Digit buttons
-                this.handleDigitClick(buttonId);
+                const digit = buttonId;
+                this.handleDigitClick(digit);
                 break;
         }
 
         this.updateDisplay();
     }
 
+    updateDisplay() {
+        const operationDisplay = document.getElementById('current-operation');
+        operationDisplay.textContent = this.displayValue;
+    }
+
     get displayValue() {
+        console.log(this.#operator);
         return (
             this.#leftOperand.displayValue +
             this.#operator.displayValue +
@@ -67,10 +77,10 @@ export default class Calculator {
         );
     }
 
-    reset() {
-        this.#leftOperand = '0';
-        this.#operator = null;
-        this.#rightOperand = null;
+    reset() {  // Maybe make value update methods consistent, consider types
+        this.#leftOperand.setValue(0);
+        this.#operator.id = null;
+        this.#rightOperand.setValue(null);
         this.#state = {
             lastAction: null,
             precedingToken: 'leftOperand',
@@ -78,44 +88,109 @@ export default class Calculator {
     }
 
     evaluate() {
+
+        if (this.#rightOperand.absoluteValue === null) {
+            return;
+        }
+
         const result = this.#operator.operate(
             this.#leftOperand.numberValue,
             this.#rightOperand.numberValue,
         );
 
         this.reset();
-        this.#leftOperand.update(String(+result));  // Fix/implement
+        this.#leftOperand.setValue(result);
+
+        this.#state.lastAction = 'evaluate';
+        this.#state.precedingToken = 'leftOperand';
     }
 
-    appendCurrentOperand(character) {
+    handleDigitClick(digit) {
+
+        if (this.#state.lastAction === 'evaluate') {
+            this.reset();
+        }
 
         switch (this.#state.precedingToken) {
 
             case 'leftOperand':
-                this.#leftOperand += character;
+                this.#leftOperand.append(digit);
                 this.#state.lastAction = 'updateLeftOperand';
                 this.#state.precedingToken = 'leftOperand';
                 break;
 
             case 'operator':
-                this.#rightOperand += character;
-                this.#state.lastAction = 'updateRightOperand';
-                this.#state.precedingToken = 'operator';
-                break;
-
             case 'rightOperand':
-                this.#rightOperand += character;
+                this.#rightOperand.append(digit);
                 this.#state.lastAction = 'updateRightOperand';
                 this.#state.precedingToken = 'rightOperand';
                 break;
         }
     }
 
-    updateOperator(operatorId) {
-        this.#operator.id = operatorId;
+    handleDecimalSeparatorClick() {
+
+        if (this.#state.lastAction === 'evaluate') {
+            this.reset();
+        }
+
+        switch (this.#state.precedingToken) {
+
+            case 'leftOperand':
+                this.#leftOperand.append('.');
+                this.#state.lastAction = 'updateLeftOperand';
+                this.#state.precedingToken = 'leftOperand';
+                break;
+
+            case 'operator':
+            case 'rightOperand':
+                this.#rightOperand.append('.');
+                this.#state.lastAction = 'updateRightOperand';
+                this.#state.precedingToken = 'rightOperand';
+                break;
+        }
     }
 
-    deleteLastCharacter() {
+    handleNegateClick() {
+
+        if (this.#state.lastAction === 'evaluate') {
+            this.reset();
+        }
+
+        switch (this.#state.precedingToken) {
+
+            case 'leftOperand':
+                this.#leftOperand.negate();
+                this.#state.lastAction = 'updateLeftOperand';
+                this.#state.precedingToken = 'leftOperand';
+                break;
+
+            case 'operator':
+            case 'rightOperand':
+                this.#rightOperand.negate();
+                this.#state.lastAction = 'updateRightOperand';
+                this.#state.precedingToken = 'rightOperand';
+                break;
+        }
+    }
+
+    handleOperatorClick(operatorId) {
+
+        if (this.#state.precedingToken === 'rightOperand') {
+            this.evaluate();
+        }
+
+        this.#operator.id = operatorId;
+        this.#state.lastAction = 'updateOperator';
+        this.#state.precedingToken = 'operator';
+    }
+
+    handleBackspaceClick() {
+
+        if (this.#state.lastAction === 'evaluate') {
+            this.reset();
+            return;
+        }
 
         switch (this.#state.precedingToken) {
 
@@ -145,52 +220,12 @@ export default class Calculator {
         }
     }
 
-    negateCurrentOperand() {
-
-        switch (this.#state.precedingToken) {
-
-            case 'leftOperand':
-                this.#leftOperand.negate();
-                this.#state.lastAction = 'updateLeftOperand';
-                this.#state.precedingToken = 'leftOperand';
-                break;
-
-            case 'operator':
-                this.#rightOperand.negate();
-                this.#state.lastAction = 'updateRightOperand';
-                this.#state.precedingToken = 'rightOperand';
-                break;
-
-            case 'rightOperand':
-                this.#rightOperand.negate();
-                this.#state.lastAction = 'updateRightOperand';
-                this.#state.precedingToken = 'rightOperand';
-                break;
-        }
-    }
-
-    handleDigitClick(digit) {
-        this.operation.append(digit);
-    }
-
-    handleNegateClick() {
-        this.operation.negateCurrentOperand();
-    }
-
-    handleDecimalSeparatorClick() {
-        this.operation.append('.');
-    }
-
-    handleOperatorClick(operatorId) {
-    }
-
-    handleBackspaceClick() {
-    }
-
     handleClearAllClick() {
+        this.reset();
     }
 
     handleEvaluateClick() {
+        this.evaluate();
     }
 
     handleKeyDown() {

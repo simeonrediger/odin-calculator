@@ -52,8 +52,33 @@ export default class Operand {
         return this.absoluteValue === null;
     }
 
-    append(character) {
-        this.absoluteValue += character;
+    setValue(value) {
+
+        if (typeof value !== 'number' && value !== null) {
+            throw new TypeError(`Expected number. Got ${typeof value}`);
+        }
+
+        if (value === null) {
+            this.absoluteValue = value;
+        } else {
+            this.absoluteValue = String(value);
+        }
+    }
+
+    append(value) {
+
+        // Tests if value is either a digit or a decimal separator
+        if (!/^(\d|\.)$/.test(value)) {
+            throw new Error(
+                `Expected digit or decimal separator. Got '${value}'.`
+            );
+        }
+
+        if (value === '.' && this.absoluteValue.includes('.')) {
+            return;
+        }
+
+        this.absoluteValue += value;
     }
 
     negate() {
