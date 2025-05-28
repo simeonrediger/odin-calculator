@@ -10,7 +10,6 @@ export default class Calculator {
     constructor(leftOperand, operator, rightOperand) {
         this.#leftOperand = leftOperand;
         this.#operator = operator;
-        console.log(this.#operator);
         this.#rightOperand = rightOperand;
         this.reset();
         this.updateDisplay();
@@ -69,7 +68,6 @@ export default class Calculator {
     }
 
     get displayValue() {
-        console.log(this.#operator);
         return (
             this.#leftOperand.displayValue +
             this.#operator.displayValue +
