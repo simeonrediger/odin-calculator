@@ -7,6 +7,10 @@ export default class Operator {
         this.id = null;
     }
 
+    get id() {
+        return this.#id;
+    }
+
     set id(value) {
 
         if (!this.#validIds.includes(value) && value !== null) {

@@ -5,6 +5,7 @@ export default class Calculator {
     #state = {
         lastAction: null,
         precedingToken: 'leftOperand',
+        errorDisplayed: false,
     };
 
     #operationDisplay = document.getElementById('operation');
@@ -28,6 +29,10 @@ export default class Calculator {
         }
 
         const buttonId = event.target.id;
+
+        if (this.#state.errorDisplayed) {
+            this.reset();
+        }
 
         switch (buttonId) {
             case 'clear-all':
@@ -69,6 +74,21 @@ export default class Calculator {
     }
 
     handleKeyDown(event) {
+
+        if (![
+            'c', 'Clear',
+            'Delete', 'Backspace',
+            '+', '-', '*', '/', '^',
+            '=', 'Enter',
+            '.',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        ].includes(event.key)) {
+            return;
+        }
+
+        if (this.#state.errorDisplayed) {
+            this.reset();
+        }
 
         switch (event.key) {
 
@@ -138,9 +158,6 @@ export default class Calculator {
                 const digit = event.key;
                 this.handleDigitClick(digit);
                 break;
-
-            default:
-                return;
         }
 
         this.displayOperation();
@@ -180,6 +197,7 @@ export default class Calculator {
         this.#state = {
             lastAction: null,
             precedingToken: 'leftOperand',
+            errorDisplayed: false,
         };
     }
 
@@ -187,6 +205,10 @@ export default class Calculator {
 
         if (this.#rightOperand.absoluteValue === null) {
             return;
+        }
+
+        if (this.isDividingByZero) {
+            this.handleDivisionByZero();
         }
 
         const result = this.#operator.operate(
@@ -352,5 +374,19 @@ export default class Calculator {
         return parseFloat(
             getComputedStyle(this.#operationDisplay).fontSize
         );
+    }
+
+    get isDividingByZero() {
+        return (
+            this.#operator.id === 'divide' &&
+            this.#rightOperand.numberValue === 0
+        );
+    }
+
+    handleDivisionByZero() {
+        this.#operationDisplay.textContent = 'Undefined';
+        this.displayLastOperation();
+        this.#state.errorDisplayed = true;
+        throw new Error('Cannot divide by zero.');
     }
 }
