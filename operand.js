@@ -85,19 +85,19 @@ export default class Operand {
         this.isNegative = !this.isNegative;
     }
 
-    deleteLastCharacter(value) {
+    deleteLastCharacter() {
 
-        if (value.length > 1) {
-            value = value.slice(0, -1);
+        if (this.absoluteValue.length > 1) {
+            this.absoluteValue = this.absoluteValue.slice(0, -1);
 
-        } else if (value !== '0') {
-            value = '0';
+        } else if (this.absoluteValue !== '0') {
+            this.absoluteValue = '0';
 
         } else if (this.isNegative) {
             this.negate();
 
         } else if (!this.isLeftOperand) {
-            value = null;
+            this.absoluteValue = null;
         }
     }
 
