@@ -10,3 +10,4 @@
 - Make use of private/public class members more consistent
 - Use named variables for complex boolean expressions (?)
 - Add accessibility features
+- Add support for mobile screens
