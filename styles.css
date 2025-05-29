@@ -31,7 +31,7 @@ body {
   min-height: 100vh;
 }
 
-#app-screen {
+#phone-screen {
   background-color: black;
   border: var(--calculator-border-size) solid #bdbab6;
   border-radius: 4rem;
