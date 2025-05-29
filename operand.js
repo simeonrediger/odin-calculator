@@ -113,9 +113,12 @@ export default class Operand {
             throw new TypeError(`Expected string. Got ${typeof value}.`);
         }
 
+        const leadingZeros = /^0+\d/;
+
         if (value?.startsWith('.')) {
             value = '0' + value;  // Add units place
-        } else if (value?.startsWith('00')) {
+
+        } else if (leadingZeros.test(value)) {
             value = this.#removeRedundantLeadingZeros(value);
         }
 
