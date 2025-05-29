@@ -67,9 +67,9 @@ export default class Operand {
     }
 
     append(value) {
+        const isDigitOrDecimalSeparator = /^(\d|\.)$/.test(value);
 
-        // Tests if value is either a digit or a decimal separator
-        if (!/^(\d|\.)$/.test(value)) {
+        if (!isDigitOrDecimalSeparator) {
             throw new Error(
                 `Expected digit or decimal separator. Got '${value}'.`
             );
