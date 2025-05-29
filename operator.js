@@ -14,7 +14,6 @@ export default class Operator {
         }
 
         this.#id = value;
-        // this.#updateOperate();
     }
 
     get displayValue() {
@@ -50,36 +49,4 @@ export default class Operator {
                 return leftOperand ** rightOperand;
         }
     }
-
-    // // Private API
-    // #updateOperate() {
-
-    //     if (this.#id === null) {
-    //         this.#operate = null;
-    //     }
-
-    //     this.#operate = this[`#${this.#id}`];
-    //     console.log(`#${this.#id}`);
-    //     console.log(this.#operate);
-    // }
-
-    // #add(leftOperand, rightOperand) {
-    //     return leftOperand + rightOperand;
-    // }
-
-    // #subtract(leftOperand, rightOperand) {
-    //     return leftOperand - rightOperand;
-    // }
-
-    // #multiply(leftOperand, rightOperand) {
-    //     return leftOperand * rightOperand;
-    // }
-
-    // #divide(leftOperand, rightOperand) {
-    //     return leftOperand / rightOperand;
-    // }
-
-    // #raise(leftOperand, rightOperand) {
-    //     return leftOperand ** rightOperand;
-    // }
 }
