@@ -1,7 +1,6 @@
 export default class Operator {
     #validIds = ['add', 'subtract', 'multiply', 'divide', 'raise'];
     #id = null;
-    #operate = null;
 
     // Public API
     reset() {
@@ -15,7 +14,7 @@ export default class Operator {
         }
 
         this.#id = value;
-        this.#updateOperate();
+        // this.#updateOperate();
     }
 
     get displayValue() {
@@ -27,41 +26,60 @@ export default class Operator {
         return document.getElementById(this.#id).textContent;
     }
 
-    get operate() {
-        return this.#operate;
-    }
-
     delete(value) {
         this.id = null;
     }
 
-    // Private API
-    #updateOperate() {
+    operate(leftOperand, rightOperand) {
 
-        if (this.#id === null) {
-            this.#operate = null;
+        switch (this.#id) {
+
+            case 'add':
+                return leftOperand + rightOperand;
+
+            case 'subtract':
+                return leftOperand - rightOperand;
+
+            case 'multiply':
+                return leftOperand * rightOperand;
+
+            case 'divide':
+                return leftOperand / rightOperand;
+
+            case 'raise':
+                return leftOperand ** rightOperand;
         }
-
-        this.#operate = this[`#${this.#id}`];
     }
 
-    #add(leftOperand, rightOperand) {
-        return leftOperand + rightOperand;
-    }
+    // // Private API
+    // #updateOperate() {
 
-    #subtract(leftOperand, rightOperand) {
-        return leftOperand - rightOperand;
-    }
+    //     if (this.#id === null) {
+    //         this.#operate = null;
+    //     }
 
-    #multiply(leftOperand, rightOperand) {
-        return leftOperand * rightOperand;
-    }
+    //     this.#operate = this[`#${this.#id}`];
+    //     console.log(`#${this.#id}`);
+    //     console.log(this.#operate);
+    // }
 
-    #divide(leftOperand, rightOperand) {
-        return leftOperand / rightOperand;
-    }
+    // #add(leftOperand, rightOperand) {
+    //     return leftOperand + rightOperand;
+    // }
 
-    #raise(leftOperand, rightOperand) {
-        return leftOperand ** rightOperand;
-    }
+    // #subtract(leftOperand, rightOperand) {
+    //     return leftOperand - rightOperand;
+    // }
+
+    // #multiply(leftOperand, rightOperand) {
+    //     return leftOperand * rightOperand;
+    // }
+
+    // #divide(leftOperand, rightOperand) {
+    //     return leftOperand / rightOperand;
+    // }
+
+    // #raise(leftOperand, rightOperand) {
+    //     return leftOperand ** rightOperand;
+    // }
 }
