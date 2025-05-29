@@ -68,6 +68,7 @@ export default class Calculator {
         this.updateDisplay();
     }
 
+    // Private API
     updateDisplay() {
         this.display.textContent = this.displayValue;
         this.adjustFontSizeToFit();
@@ -109,7 +110,6 @@ export default class Calculator {
         this.#state.precedingToken = 'leftOperand';
     }
 
-    // Private API
     handleDigitClick(digit) {
 
         if (this.#state.lastAction === 'evaluate') {
