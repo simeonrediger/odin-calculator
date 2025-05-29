@@ -23,7 +23,7 @@ export default class Operand {
 
         if (this.isLeftOperand) {
             value = this.#roundToNearestMillionth(value);
-        }        
+        }
 
         value = this.#addThousandsSeparators(value);
 
