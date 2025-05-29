@@ -78,7 +78,7 @@ export default class Operand {
             return;
         }
 
-        this.absoluteValue += value;
+        this.absoluteValue = (this.absoluteValue ?? '') + value;
     }
 
     negate() {
