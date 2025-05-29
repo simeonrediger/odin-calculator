@@ -10,6 +10,7 @@ export default class Calculator {
     #maxFontSize = 64;  // px
     #minFontSize = 32;  // px
 
+    // Public API
     constructor(leftOperand, operator, rightOperand) {
         this.#leftOperand = leftOperand;
         this.#operator = operator;
@@ -108,6 +109,7 @@ export default class Calculator {
         this.#state.precedingToken = 'leftOperand';
     }
 
+    // Private API
     handleDigitClick(digit) {
 
         if (this.#state.lastAction === 'evaluate') {
