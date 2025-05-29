@@ -1,4 +1,6 @@
 export default class Operand {
+    isEvaluationResult = false;
+
     #isLeftOperand = null;
     #absoluteValue = null;
     #isNegative = false;
@@ -12,6 +14,7 @@ export default class Operand {
     reset() {
         this.absoluteValue = this.isLeftOperand ? '0' : null;
         this.isNegative = false;
+        this.isEvaluationResult = false;
     }
 
     get displayValue() {
@@ -21,7 +24,7 @@ export default class Operand {
             return '';
         }
 
-        if (this.isLeftOperand) {
+        if (this.isLeftOperand && this.isEvaluationResult) {
             value = this.#roundToNearestMillionth(value);
         }
 

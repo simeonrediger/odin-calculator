@@ -105,6 +105,7 @@ export default class Calculator {
 
         this.reset();
         this.#leftOperand.setValue(result);
+        this.#leftOperand.isEvaluationResult = true;
 
         this.#state.lastAction = 'evaluate';
         this.#state.precedingToken = 'leftOperand';

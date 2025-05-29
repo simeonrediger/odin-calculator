@@ -1,8 +1,8 @@
-- Fix backspace behavior for negative decimal right operand
-- Fix zero inputs after decimal place
+# To-do items
 
-- Unspaghettify
-    - Convert operands (and maybe operator) to objects
-    - Use named variables for complex boolean expressions
-- Update current time continuously
+## Necessities
+
+## Enhancements
+- Condense repetitive switch statement logic for click handlers
+- Use named variables for complex boolean expressions (?)
 - Add accessibility features
