@@ -78,6 +78,10 @@ export default class Calculator {
         this.#lastOperationDisplay.textContent = this.operationText;
     }
 
+    resetLastOperation() {
+        this.#lastOperationDisplay.textContent = '';
+    }
+
     get operationText() {
         return (
             this.#leftOperand.displayValue +
@@ -87,6 +91,11 @@ export default class Calculator {
     }
 
     reset() {
+        this.resetOperation();
+        this.resetLastOperation();
+    }
+
+    resetOperation() {
         this.#leftOperand.reset();
         this.#operator.reset();
         this.#rightOperand.reset();
@@ -108,7 +117,7 @@ export default class Calculator {
         );
 
         this.displayLastOperation();
-        this.reset();
+        this.resetOperation();
         this.#leftOperand.setValue(result);
         this.#leftOperand.isEvaluationResult = true;
 
