@@ -158,10 +158,6 @@ export default class Calculator {
 
     handleNegateClick() {
 
-        if (this.#state.lastAction === 'evaluate') {
-            this.reset();
-        }
-
         switch (this.#state.precedingToken) {
 
             case 'leftOperand':
