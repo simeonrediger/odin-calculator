@@ -61,7 +61,8 @@ export default class Operand {
         if (value === null) {
             this.absoluteValue = value;
         } else {
-            this.absoluteValue = String(value);
+            this.isNegative = value < 0;
+            this.absoluteValue = String(Math.abs(value));
         }
     }
 
