@@ -83,9 +83,9 @@ export default class Calculator {
     }
 
     reset() {  // Maybe make value update methods consistent, consider types
-        this.#leftOperand.setValue(0);
-        this.#operator.id = null;
-        this.#rightOperand.setValue(null);
+        this.#leftOperand.reset();
+        this.#operator.reset();
+        this.#rightOperand.reset();
         this.#state = {
             lastAction: null,
             precedingToken: 'leftOperand',
