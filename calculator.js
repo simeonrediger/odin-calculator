@@ -82,7 +82,7 @@ export default class Calculator {
         );
     }
 
-    reset() {  // Maybe make value update methods consistent, consider types
+    reset() {
         this.#leftOperand.reset();
         this.#operator.reset();
         this.#rightOperand.reset();
