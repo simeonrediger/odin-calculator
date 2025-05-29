@@ -2,6 +2,7 @@
 
 ## Necessities
 - Add keyboard support
+- Display division by zero error
 
 ## Enhancements
 - Change "absoluteValue" to "unsignedText"

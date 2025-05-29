@@ -68,6 +68,84 @@ export default class Calculator {
         this.displayOperation();
     }
 
+    handleKeyDown(event) {
+
+        switch (event.key) {
+
+            case 'c':
+
+                if (event.ctrlKey) {
+                    this.reset();
+                }
+
+                break;
+
+            case 'Clear':
+                this.reset();
+                break;
+
+            case 'Delete':
+            case 'Backspace':
+                this.handleBackspaceClick();
+                break;
+
+            case '+':
+                this.handleOperatorClick('add');
+                break;
+
+            case '-':
+
+                if (event.altKey) {
+                    this.handleNegateClick();
+                } else {
+                    this.handleOperatorClick('subtract');
+                }
+
+                break;
+
+            case '*':
+                this.handleOperatorClick('multiply');
+                break;
+
+            case '/':
+                event.preventDefault();  // Prevent quick search in Firefox
+                this.handleOperatorClick('divide');
+                break;
+
+            case '^':
+                this.handleOperatorClick('raise');
+                break;
+
+            case '=':
+            case 'Enter':
+                this.handleEvaluateClick();
+                break;
+
+            case '.':
+                this.handleDecimalSeparatorClick();
+                break;
+
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                const digit = event.key;
+                this.handleDigitClick(digit);
+                break;
+
+            default:
+                return;
+        }
+
+        this.displayOperation();
+    }
+
     // Private API
     displayOperation() {
         this.#operationDisplay.textContent = this.operationText;
@@ -244,9 +322,6 @@ export default class Calculator {
 
     handleEvaluateClick() {
         this.evaluate();
-    }
-
-    handleKeyDown() {
     }
 
     adjustFontSizeToFit() {
