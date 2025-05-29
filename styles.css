@@ -86,7 +86,7 @@ body {
 }
 
 #last-operation,
-#current-operation {
+#operation {
   margin-bottom: 0.5rem;
   text-align: right;
   overflow: auto;
@@ -98,7 +98,7 @@ body {
   font-size: 1.825rem;
 }
 
-#current-operation {
+#operation {
   font-size: 4rem;
 }
 

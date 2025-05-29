@@ -7,6 +7,7 @@ export default class Calculator {
         precedingToken: 'leftOperand',
     };
 
+    #operationDisplay = document.getElementById('operation');
     #maxFontSize = 64;  // px
     #minFontSize = 32;  // px
 
@@ -16,9 +17,7 @@ export default class Calculator {
         this.#operator = operator;
         this.#rightOperand = rightOperand;
         this.reset();
-
-        this.display = document.getElementById('current-operation');
-        this.updateDisplay();
+        this.displayOperation();
     }
 
     handleClick(event) {
@@ -65,16 +64,16 @@ export default class Calculator {
                 break;
         }
 
-        this.updateDisplay();
+        this.displayOperation();
     }
 
     // Private API
-    updateDisplay() {
-        this.display.textContent = this.displayValue;
+    displayOperation() {
+        this.#operationDisplay.textContent = this.operationText;
         this.adjustFontSizeToFit();
     }
 
-    get displayValue() {
+    get operationText() {
         return (
             this.#leftOperand.displayValue +
             this.#operator.displayValue +
@@ -236,7 +235,7 @@ export default class Calculator {
     }
 
     adjustFontSizeToFit() {
-        this.display.style.fontSize = this.#maxFontSize + 'px';
+        this.#operationDisplay.style.fontSize = this.#maxFontSize + 'px';
 
         while (this.displayIsOverflown() && this.displayExceedsMinFontSize()) {
             const newFontSize = Math.max(
@@ -244,12 +243,15 @@ export default class Calculator {
                 this.currentFontSize - 0.5,  // Decrement by half a pixel
             );
 
-            this.display.style.fontSize = newFontSize + 'px';
+            this.#operationDisplay.style.fontSize = newFontSize + 'px';
         }
     }
 
     displayIsOverflown() {
-        return this.display.scrollWidth > this.display.clientWidth;
+        return (
+            this.#operationDisplay.scrollWidth >
+            this.#operationDisplay.clientWidth
+        );
     }
 
     displayExceedsMinFontSize() {
@@ -258,7 +260,7 @@ export default class Calculator {
 
     get currentFontSize() {
         return parseFloat(
-            getComputedStyle(this.display).fontSize
+            getComputedStyle(this.#operationDisplay).fontSize
         );
     }
 }
