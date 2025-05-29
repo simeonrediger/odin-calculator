@@ -8,6 +8,7 @@ export default class Calculator {
     };
 
     #operationDisplay = document.getElementById('operation');
+    #lastOperationDisplay = document.getElementById('last-operation');
     #maxFontSize = 64;  // px
     #minFontSize = 32;  // px
 
@@ -73,6 +74,10 @@ export default class Calculator {
         this.adjustFontSizeToFit();
     }
 
+    displayLastOperation() {
+        this.#lastOperationDisplay.textContent = this.operationText;
+    }
+
     get operationText() {
         return (
             this.#leftOperand.displayValue +
@@ -102,6 +107,7 @@ export default class Calculator {
             this.#rightOperand.numberValue,
         );
 
+        this.displayLastOperation();
         this.reset();
         this.#leftOperand.setValue(result);
         this.#leftOperand.isEvaluationResult = true;
