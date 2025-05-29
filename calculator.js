@@ -7,11 +7,16 @@ export default class Calculator {
         precedingToken: 'leftOperand',
     };
 
+    #maxFontSize = 64;  // px
+    #minFontSize = 32;  // px
+
     constructor(leftOperand, operator, rightOperand) {
         this.#leftOperand = leftOperand;
         this.#operator = operator;
         this.#rightOperand = rightOperand;
         this.reset();
+
+        this.display = document.getElementById('current-operation');
         this.updateDisplay();
     }
 
@@ -63,8 +68,8 @@ export default class Calculator {
     }
 
     updateDisplay() {
-        const operationDisplay = document.getElementById('current-operation');
-        operationDisplay.textContent = this.displayValue;
+        this.display.textContent = this.displayValue;
+        this.adjustFontSizeToFit();
     }
 
     get displayValue() {
@@ -227,5 +232,32 @@ export default class Calculator {
     }
 
     handleKeyDown() {
+    }
+
+    adjustFontSizeToFit() {
+        this.display.style.fontSize = this.#maxFontSize + 'px';
+
+        while (this.displayIsOverflown() && this.displayExceedsMinFontSize()) {
+            const newFontSize = Math.max(
+                this.#minFontSize,
+                this.currentFontSize - 0.5,  // Decrement by half a pixel
+            );
+
+            this.display.style.fontSize = newFontSize + 'px';
+        }
+    }
+
+    displayIsOverflown() {
+        return this.display.scrollWidth > this.display.clientWidth;
+    }
+
+    displayExceedsMinFontSize() {
+        return this.currentFontSize > this.#minFontSize;
+    }
+
+    get currentFontSize() {
+        return parseFloat(
+            getComputedStyle(this.display).fontSize
+        );
     }
 }
