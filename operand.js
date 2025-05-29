@@ -153,9 +153,8 @@ export default class Operand {
     }
 
     #removeRedundantLeadingZeros(value) {
-        // Removes each zero preceding a digit at the start of the string
-        // Preserves units place
-        return value.replace(/^0+(?=\d)/, '');
+        const leadingZerosBeforeDigit = /^0+(?=\d)/;
+        return value.replace(leadingZerosBeforeDigit, '');
     }
 
     #addThousandsSeparators(value) {
