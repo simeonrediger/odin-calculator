@@ -1,5 +1,10 @@
 export default class Clock {
 
+    updateClockContinuously() {
+        this.displayCurrentTime();
+        setInterval(this.displayCurrentTime, 1000);
+    }
+
     displayCurrentTime() {
         const timeDisplay = document.querySelector('#time');
         timeDisplay.textContent = new Date()

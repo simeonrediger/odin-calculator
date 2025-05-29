@@ -4,7 +4,7 @@ import Operand from './operand.js';
 import Operator from './operator.js';
 
 const clock = new Clock();
-clock.displayCurrentTime();
+clock.updateClockContinuously();
 
 const leftOperand = new Operand();
 const operator = new Operator();
