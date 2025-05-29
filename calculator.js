@@ -167,6 +167,8 @@ export default class Calculator {
                 break;
 
             case 'operator':
+                this.#rightOperand.setValue(0);
+
             case 'rightOperand':
                 this.#rightOperand.negate();
                 this.#state.lastAction = 'updateRightOperand';
