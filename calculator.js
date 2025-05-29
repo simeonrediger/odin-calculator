@@ -74,6 +74,7 @@ export default class Calculator {
     }
 
     handleKeyDown(event) {
+        document.activeElement.blur();  // Prevent key from clicking button
 
         if (![
             'c', 'Clear',
