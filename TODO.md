@@ -20,8 +20,10 @@
     - or add a default parameter that accepts configuration options
         - Preserves the option of convenience for the caller
         - Side effects are more explicit and can be controlled by the caller
-- Document complex methods and public API methods
-- Convert constants to `NAMED_CONSTANTS`
+- Write JSDocs for complex methods
+- Refactor magic numbers as `NAMED_CONSTANTS`
+- Refactor string literal state values as enums
+- Remove redundant `#isLeftOperand` setter
 
 - Condense repetitive switch statement logic for click handlers
     - Also consider leaving as is for future revisions to control flow
