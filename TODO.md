@@ -1,6 +1,7 @@
 # To-do items
 
 ## Necessities
+- Fix bug when beginning right operand with decimal separator
 
 ## Enhancements
 - Decouple display logic and font sizing logic from `Calculator` methods
@@ -33,3 +34,7 @@
 - Change `displayValue` to `text` or a better alternative
 - Add accessibility features
 - Add responsive design for smaller screens
+
+## Out of scope
+- Implement testing
+- Implement a framework like React
