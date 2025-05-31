@@ -78,7 +78,7 @@ export default class Operand {
             );
         }
 
-        if (value === '.' && this.absoluteValue.includes('.')) {
+        if (value === '.' && this.absoluteValue?.includes('.')) {
             return;
         }
 

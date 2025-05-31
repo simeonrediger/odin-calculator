@@ -1,7 +1,6 @@
 # To-do items
 
 ## Necessities
-- Fix bug when beginning right operand with decimal separator
 
 ## Enhancements
 - Decouple display logic and font sizing logic from `Calculator` methods
